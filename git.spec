@@ -1,9 +1,9 @@
 # Pass --without docs to rpmbuild if you don't want the documentation
-%define _without_docs 0
+%define _without_docs 1
 
 Name: 		git
-Version: 	1.7.10.3
-Release: 	2
+Version: 1.8.3
+Release: 1
 Summary:  	Core git tools
 License: 	GPLv2
 Group: 		Development/Tools
@@ -11,7 +11,10 @@ URL: 		http://git-core.googlecode.com/files/
 Source:		http://git-core.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:	git.xinetd
 Source2:	git.conf.httpd
-BuildRequires:	zlib-devel >= 1.2, python, openssl-devel, libcurl-devel, expat-devel, gettext %{!?_without_docs:, xmlto, asciidoc > 6.0.3}
+BuildRequires:	zlib-devel >= 1.2, python, openssl-devel, libcurl-devel, expat-devel, gettext-devel
+%{!?_without_docs:
+BuildRequires:  xmlto, asciidoc > 6.0.3
+}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires:	perl-Git = %{version}-%{release}
@@ -110,6 +113,12 @@ make %{_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" \
      ETC_GITCONFIG=/etc/gitconfig \
      gitexecdir=%{_bindir} \
      prefix=%{_prefix} all %{!?_without_docs: doc}
+pushd contrib/subtree
+make %{_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" \
+     ETC_GITCONFIG=/etc/gitconfig \
+     libexecdir=%{_bindir} \
+     prefix=%{_prefix} all %{!?_without_docs: doc}
+popd
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -118,6 +127,15 @@ make %{_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" DESTDIR=$RPM_BUILD_ROOT \
      ETC_GITCONFIG=/etc/gitconfig \
      gitexecdir=%{_bindir} \
      INSTALLDIRS=vendor install %{!?_without_docs: install-doc}
+
+pushd contrib/subtree
+make %{_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" DESTDIR=$RPM_BUILD_ROOT \
+     prefix=%{_prefix} mandir=%{_mandir} \
+     ETC_GITCONFIG=/etc/gitconfig \
+     libexecdir=%{_bindir} \
+     INSTALLDIRS=vendor install %{!?_without_docs: install-doc}
+popd
+
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/xinetd.d
 install -m 644 %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/xinetd.d/git
 mkdir -p $RPM_BUILD_ROOT/var/www/git
@@ -129,6 +147,7 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/git.conf
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} ';'
 find $RPM_BUILD_ROOT -type f -name '*.bs' -empty -exec rm -f {} ';'
 find $RPM_BUILD_ROOT -type f -name perllocal.pod -exec rm -f {} ';'
+rm -rf $RPM_BUILD_ROOT%{perl_vendorlib}/Git/SVN*
 
 (find $RPM_BUILD_ROOT%{_bindir} -type f | grep -vE "archimport|svn|cvs|email|gitk|git-gui|git-citooli|git-daemon" | sed -e s@^$RPM_BUILD_ROOT@@)               > bin-man-doc-files
 (find $RPM_BUILD_ROOT%{_datadir}/locale -type f | sed -e s@^$RPM_BUILD_ROOT@@ -e 's/$/*/' ) >> bin-man-doc-files
@@ -146,7 +165,7 @@ install -m 644 -T contrib/completion/git-completion.bash $RPM_BUILD_ROOT%{_sysco
 rm -f $RPM_BUILD_ROOT/%{_bindir}/*svn*
 rm -f $RPM_BUILD_ROOT/%{_bindir}/*cvs*
 rm -f $RPM_BUILD_ROOT/%{_bindir}/git-archimport
-
+ 
 %clean
 
 rm -rf $RPM_BUILD_ROOT
