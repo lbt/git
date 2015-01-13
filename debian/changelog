@@ -1,4 +1,4 @@
-git (1:2.1.4-2.1) unstable; urgency=medium
+git (1:2.1.4-3) unstable; urgency=medium
 
   * debian/diff/:
     * 0011-is_hfs_dotgit-loosen-over-eager-...diff: new from
@@ -24,7 +24,7 @@ git (1:2.1.4-2.1) unstable; urgency=medium
   * gitweb.apache2.conf: make configuration conditional on MIME
     support (thx Uwe Storbeck; closes: #775236).
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Mon, 12 Jan 2015 16:59:45 -0800
+ -- Jonathan Nieder <jrnieder@gmail.com>  Mon, 12 Jan 2015 17:56:39 -0800
 
 git (1:2.1.4-2) unstable; urgency=medium
 
