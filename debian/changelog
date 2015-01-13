@@ -1,3 +1,12 @@
+git (1:2.1.4-2.1) unstable; urgency=medium
+
+  * gitweb.triggers: use interest-noawait so apache2 continues
+    to satisfy dependencies while the trigger is pending (thx
+    Niels Thykier and Guillem Jover; closes: #774607).
+  * gitweb: Pre-Depends: dpkg 1.16.1 for -noawait support.
+
+ -- Jonathan Nieder <jrnieder@gmail.com>  Mon, 12 Jan 2015 16:59:45 -0800
+
 git (1:2.1.4-2) unstable; urgency=medium
 
   * update gitweb configuration for Apache 2.4:
