@@ -4,6 +4,8 @@ git (1:2.1.4-2.1) unstable; urgency=medium
     to satisfy dependencies while the trigger is pending (thx
     Niels Thykier and Guillem Jover; closes: #774607).
   * gitweb: Pre-Depends: dpkg 1.16.1 for -noawait support.
+  * gitweb.apache2.conf: make configuration conditional on MIME
+    support (thx Uwe Storbeck; closes: #775236).
 
  -- Jonathan Nieder <jrnieder@gmail.com>  Mon, 12 Jan 2015 16:59:45 -0800
 
