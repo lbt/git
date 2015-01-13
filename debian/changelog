@@ -1,5 +1,22 @@
 git (1:2.1.4-2.1) unstable; urgency=medium
 
+  * debian/diff/:
+    * 0011-is_hfs_dotgit-loosen-over-eager-...diff: new from
+      upstream: do not drop the upper bytes of a Unicode code
+      point when matching against ".git" (thx Linus Torvalds and
+      Jeff King).
+    * 0012-create_default_files-don-t-set-u-x-...diff: new from
+      upstream: init: do not mark $GIT_DIR/config executable (thx
+      Michael Haggerty; regression introduced in v2.1.0-rc0).
+    * 0013-push-truly-use-simple-as-default-...diff: new from
+      upstream: push: use the long-advertised conservative
+      default behavior for argumentless "git push [<remote>]",
+      instead of a more aggressive default enabled by mistake
+      (thx Jeff King; regression introduced in v1.8.4-rc0).
+    * 0014-for_each_reflog_ent_reverse-fix-...diff: new from
+      upstream: do not misparse reflog when a newline appears
+      BUFSIZ-1 bytes from the end of file (thx Jeff King;
+      regression introduced in v1.8.3-rc0).
   * gitweb.triggers: use interest-noawait so apache2 continues
     to satisfy dependencies while the trigger is pending (thx
     Niels Thykier and Guillem Jover; closes: #774607).
