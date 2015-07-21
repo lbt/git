@@ -42,7 +42,7 @@ static long diff_algorithm;
 
 static char diff_colors[][COLOR_MAXLEN] = {
 	GIT_COLOR_RESET,
-	GIT_COLOR_NORMAL,	/* PLAIN */
+	GIT_COLOR_NORMAL,	/* CONTEXT */
 	GIT_COLOR_BOLD,		/* METAINFO */
 	GIT_COLOR_CYAN,		/* FRAGINFO */
 	GIT_COLOR_RED,		/* OLD */
@@ -54,8 +54,8 @@ static char diff_colors[][COLOR_MAXLEN] = {
 
 static int parse_diff_color_slot(const char *var)
 {
-	if (!strcasecmp(var, "plain"))
-		return DIFF_PLAIN;
+	if (!strcasecmp(var, "context") || !strcasecmp(var, "plain"))
+		return DIFF_CONTEXT;
 	if (!strcasecmp(var, "meta"))
 		return DIFF_METAINFO;
 	if (!strcasecmp(var, "frag"))
@@ -248,8 +248,7 @@ int git_diff_basic_config(const char *var, const char *value, void *cb)
 			return 0;
 		if (!value)
 			return config_error_nonbool(var);
-		color_parse(value, var, diff_colors[slot]);
-		return 0;
+		return color_parse(value, diff_colors[slot]);
 	}
 
 	/* like GNU diff's --suppress-blank-empty option  */
@@ -376,7 +375,7 @@ static unsigned long diff_filespec_size(struct diff_filespec *one)
 {
 	if (!DIFF_FILE_VALID(one))
 		return 0;
-	diff_populate_filespec(one, 1);
+	diff_populate_filespec(one, CHECK_SIZE_ONLY);
 	return one->size;
 }
 
@@ -502,7 +501,7 @@ static void emit_add_line(const char *reset,
 static void emit_hunk_header(struct emit_callback *ecbdata,
 			     const char *line, int len)
 {
-	const char *plain = diff_get_color(ecbdata->color_diff, DIFF_PLAIN);
+	const char *context = diff_get_color(ecbdata->color_diff, DIFF_CONTEXT);
 	const char *frag = diff_get_color(ecbdata->color_diff, DIFF_FRAGINFO);
 	const char *func = diff_get_color(ecbdata->color_diff, DIFF_FUNCINFO);
 	const char *reset = diff_get_color(ecbdata->color_diff, DIFF_RESET);
@@ -519,7 +518,7 @@ static void emit_hunk_header(struct emit_callback *ecbdata,
 	if (len < 10 ||
 	    memcmp(line, atat, 2) ||
 	    !(ep = memmem(line + 2, len - 2, atat, 2))) {
-		emit_line(ecbdata->opt, plain, reset, line, len);
+		emit_line(ecbdata->opt, context, reset, line, len);
 		return;
 	}
 	ep += 2; /* skip over @@ */
@@ -541,7 +540,7 @@ static void emit_hunk_header(struct emit_callback *ecbdata,
 		if (*ep != ' ' && *ep != '\t')
 			break;
 	if (ep != cp) {
-		strbuf_addstr(&msgbuf, plain);
+		strbuf_addstr(&msgbuf, context);
 		strbuf_add(&msgbuf, cp, ep - cp);
 		strbuf_addstr(&msgbuf, reset);
 	}
@@ -624,10 +623,10 @@ static void emit_rewrite_lines(struct emit_callback *ecb,
 		data += len;
 	}
 	if (!endp) {
-		const char *plain = diff_get_color(ecb->color_diff,
-						   DIFF_PLAIN);
+		const char *context = diff_get_color(ecb->color_diff,
+						     DIFF_CONTEXT);
 		putc('\n', ecb->opt->file);
-		emit_line_0(ecb->opt, plain, reset, '\\',
+		emit_line_0(ecb->opt, context, reset, '\\',
 			    nneof, strlen(nneof));
 	}
 }
@@ -1087,7 +1086,7 @@ static void init_diff_words_data(struct emit_callback *ecbdata,
 		struct diff_words_style *st = ecbdata->diff_words->style;
 		st->old.color = diff_get_color_opt(o, DIFF_FILE_OLD);
 		st->new.color = diff_get_color_opt(o, DIFF_FILE_NEW);
-		st->ctx.color = diff_get_color_opt(o, DIFF_PLAIN);
+		st->ctx.color = diff_get_color_opt(o, DIFF_CONTEXT);
 	}
 }
 
@@ -1163,7 +1162,7 @@ static void fn_out_consume(void *priv, char *line, unsigned long len)
 {
 	struct emit_callback *ecbdata = priv;
 	const char *meta = diff_get_color(ecbdata->color_diff, DIFF_METAINFO);
-	const char *plain = diff_get_color(ecbdata->color_diff, DIFF_PLAIN);
+	const char *context = diff_get_color(ecbdata->color_diff, DIFF_CONTEXT);
 	const char *reset = diff_get_color(ecbdata->color_diff, DIFF_RESET);
 	struct diff_options *o = ecbdata->opt;
 	const char *line_prefix = diff_line_prefix(o);
@@ -1234,7 +1233,7 @@ static void fn_out_consume(void *priv, char *line, unsigned long len)
 		}
 		diff_words_flush(ecbdata);
 		if (ecbdata->diff_words->type == DIFF_WORDS_PORCELAIN) {
-			emit_line(ecbdata->opt, plain, reset, line, len);
+			emit_line(ecbdata->opt, context, reset, line, len);
 			fputs("~\n", ecbdata->opt->file);
 		} else {
 			/*
@@ -1246,7 +1245,7 @@ static void fn_out_consume(void *priv, char *line, unsigned long len)
 			      line++;
 			      len--;
 			}
-			emit_line(ecbdata->opt, plain, reset, line, len);
+			emit_line(ecbdata->opt, context, reset, line, len);
 		}
 		return;
 	}
@@ -1254,7 +1253,7 @@ static void fn_out_consume(void *priv, char *line, unsigned long len)
 	if (line[0] != '+') {
 		const char *color =
 			diff_get_color(ecbdata->color_diff,
-				       line[0] == '-' ? DIFF_FILE_OLD : DIFF_PLAIN);
+				       line[0] == '-' ? DIFF_FILE_OLD : DIFF_CONTEXT);
 		ecbdata->lno_in_preimage++;
 		if (line[0] == ' ')
 			ecbdata->lno_in_postimage++;
@@ -1910,11 +1909,11 @@ static void show_dirstat(struct diff_options *options)
 			diff_free_filespec_data(p->one);
 			diff_free_filespec_data(p->two);
 		} else if (DIFF_FILE_VALID(p->one)) {
-			diff_populate_filespec(p->one, 1);
+			diff_populate_filespec(p->one, CHECK_SIZE_ONLY);
 			copied = added = 0;
 			diff_free_filespec_data(p->one);
 		} else if (DIFF_FILE_VALID(p->two)) {
-			diff_populate_filespec(p->two, 1);
+			diff_populate_filespec(p->two, CHECK_SIZE_ONLY);
 			copied = 0;
 			added = p->two->size;
 			diff_free_filespec_data(p->two);
@@ -2094,7 +2093,6 @@ static unsigned char *deflate_it(char *data,
 	unsigned char *deflated;
 	git_zstream stream;
 
-	memset(&stream, 0, sizeof(stream));
 	git_deflate_init(&stream, zlib_compression_level);
 	bound = git_deflate_bound(&stream, size);
 	deflated = xmalloc(bound);
@@ -2188,8 +2186,8 @@ int diff_filespec_is_binary(struct diff_filespec *one)
 			one->is_binary = one->driver->binary;
 		else {
 			if (!one->data && DIFF_FILE_VALID(one))
-				diff_populate_filespec(one, 0);
-			if (one->data)
+				diff_populate_filespec(one, CHECK_BINARY);
+			if (one->is_binary == -1 && one->data)
 				one->is_binary = buffer_is_binary(one->data,
 						one->size);
 			if (one->is_binary == -1)
@@ -2324,6 +2322,19 @@ static void builtin_diff(const char *name_a,
 	} else if (!DIFF_OPT_TST(o, TEXT) &&
 	    ( (!textconv_one && diff_filespec_is_binary(one)) ||
 	      (!textconv_two && diff_filespec_is_binary(two)) )) {
+		if (!one->data && !two->data &&
+		    S_ISREG(one->mode) && S_ISREG(two->mode) &&
+		    !DIFF_OPT_TST(o, BINARY)) {
+			if (!hashcmp(one->sha1, two->sha1)) {
+				if (must_show_header)
+					fprintf(o->file, "%s", header.buf);
+				goto free_ab_and_return;
+			}
+			fprintf(o->file, "%s", header.buf);
+			fprintf(o->file, "%sBinary files %s and %s differ\n",
+				line_prefix, lbl[0], lbl[1]);
+			goto free_ab_and_return;
+		}
 		if (fill_mmfile(&mf1, one) < 0 || fill_mmfile(&mf2, two) < 0)
 			die("unable to read files to diff");
 		/* Quite common confusing case */
@@ -2668,8 +2679,9 @@ static int diff_populate_gitlink(struct diff_filespec *s, int size_only)
  * grab the data for the blob (or file) for our own in-core comparison.
  * diff_filespec has data and size fields for this purpose.
  */
-int diff_populate_filespec(struct diff_filespec *s, int size_only)
+int diff_populate_filespec(struct diff_filespec *s, unsigned int flags)
 {
+	int size_only = flags & CHECK_SIZE_ONLY;
 	int err = 0;
 	/*
 	 * demote FAIL to WARN to allow inspecting the situation
@@ -2724,6 +2736,11 @@ int diff_populate_filespec(struct diff_filespec *s, int size_only)
 		}
 		if (size_only)
 			return 0;
+		if ((flags & CHECK_BINARY) &&
+		    s->size > big_file_threshold && s->is_binary == -1) {
+			s->is_binary = 1;
+			return 0;
+		}
 		fd = open(s->path, O_RDONLY);
 		if (fd < 0)
 			goto err_empty;
@@ -2745,16 +2762,21 @@ int diff_populate_filespec(struct diff_filespec *s, int size_only)
 	}
 	else {
 		enum object_type type;
-		if (size_only) {
+		if (size_only || (flags & CHECK_BINARY)) {
 			type = sha1_object_info(s->sha1, &s->size);
 			if (type < 0)
 				die("unable to read %s", sha1_to_hex(s->sha1));
-		} else {
-			s->data = read_sha1_file(s->sha1, &type, &s->size);
-			if (!s->data)
-				die("unable to read %s", sha1_to_hex(s->sha1));
-			s->should_free = 1;
+			if (size_only)
+				return 0;
+			if (s->size > big_file_threshold && s->is_binary == -1) {
+				s->is_binary = 1;
+				return 0;
+			}
 		}
+		s->data = read_sha1_file(s->sha1, &type, &s->size);
+		if (!s->data)
+			die("unable to read %s", sha1_to_hex(s->sha1));
+		s->should_free = 1;
 	}
 	return 0;
 }
@@ -4518,7 +4540,7 @@ void diff_flush(struct diff_options *options)
 			show_stats(&diffstat, options);
 		if (output_format & DIFF_FORMAT_SHORTSTAT)
 			show_shortstats(&diffstat, options);
-		if (output_format & DIFF_FORMAT_DIRSTAT)
+		if (output_format & DIFF_FORMAT_DIRSTAT && dirstat_by_line)
 			show_dirstat_by_line(&diffstat, options);
 		free_diffstat_info(&diffstat);
 		separator++;
@@ -4688,8 +4710,8 @@ static int diff_filespec_check_stat_unmatch(struct diff_filepair *p)
 	    !DIFF_FILE_VALID(p->two) ||
 	    (p->one->sha1_valid && p->two->sha1_valid) ||
 	    (p->one->mode != p->two->mode) ||
-	    diff_populate_filespec(p->one, 1) ||
-	    diff_populate_filespec(p->two, 1) ||
+	    diff_populate_filespec(p->one, CHECK_SIZE_ONLY) ||
+	    diff_populate_filespec(p->two, CHECK_SIZE_ONLY) ||
 	    (p->one->size != p->two->size) ||
 	    !diff_filespec_is_identical(p->one, p->two)) /* (2) */
 		p->skip_stat_unmatch_result = 1;
@@ -4931,7 +4953,7 @@ static char *run_textconv(const char *pgm, struct diff_filespec *spec,
 	struct diff_tempfile *temp;
 	const char *argv[3];
 	const char **arg = argv;
-	struct child_process child;
+	struct child_process child = CHILD_PROCESS_INIT;
 	struct strbuf buf = STRBUF_INIT;
 	int err = 0;
 
@@ -4940,7 +4962,6 @@ static char *run_textconv(const char *pgm, struct diff_filespec *spec,
 	*arg++ = temp->name;
 	*arg = NULL;
 
-	memset(&child, 0, sizeof(child));
 	child.use_shell = 1;
 	child.argv = argv;
 	child.out = -1;

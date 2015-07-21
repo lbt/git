@@ -130,32 +130,6 @@ char *git_path(const char *fmt, ...)
 	return ret;
 }
 
-void home_config_paths(char **global, char **xdg, char *file)
-{
-	char *xdg_home = getenv("XDG_CONFIG_HOME");
-	char *home = getenv("HOME");
-	char *to_free = NULL;
-
-	if (!home) {
-		if (global)
-			*global = NULL;
-	} else {
-		if (!xdg_home) {
-			to_free = mkpathdup("%s/.config", home);
-			xdg_home = to_free;
-		}
-		if (global)
-			*global = mkpathdup("%s/.gitconfig", home);
-	}
-
-	if (!xdg_home)
-		*xdg = NULL;
-	else
-		*xdg = mkpathdup("%s/git/%s", xdg_home, file);
-
-	free(to_free);
-}
-
 char *git_path_submodule(const char *path, const char *fmt, ...)
 {
 	char *pathname = get_pathname();
@@ -301,14 +275,9 @@ return_null:
  * (3) "relative/path" to mean cwd relative directory; or
  * (4) "/absolute/path" to mean absolute directory.
  *
- * Unless "strict" is given, we try access() for existence of "%s.git/.git",
- * "%s/.git", "%s.git", "%s" in this order.  The first one that exists is
- * what we try.
- *
- * Second, we try chdir() to that.  Upon failure, we return NULL.
- *
- * Then, we try if the current directory is a valid git repository.
- * Upon failure, we return NULL.
+ * Unless "strict" is given, we check "%s/.git", "%s", "%s.git/.git", "%s.git"
+ * in this order. We select the first one that is a valid git repository, and
+ * chdir() to it. If none match, or we fail to chdir, we return NULL.
  *
  * If all goes well, we return the directory we used to chdir() (but
  * before ~user is expanded), avoiding getcwd() resolving symbolic
@@ -853,4 +822,19 @@ int is_ntfs_dotgit(const char *name)
 			name += len + 1;
 			len = -1;
 		}
+}
+
+char *xdg_config_home(const char *filename)
+{
+	const char *home, *config_home;
+
+	assert(filename);
+	config_home = getenv("XDG_CONFIG_HOME");
+	if (config_home && *config_home)
+		return mkpathdup("%s/git/%s", config_home, filename);
+
+	home = getenv("HOME");
+	if (home)
+		return mkpathdup("%s/.config/git/%s", home, filename);
+	return NULL;
 }

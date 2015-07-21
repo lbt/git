@@ -239,13 +239,6 @@ int is_utf8(const char *text)
 	return 1;
 }
 
-static void strbuf_addchars(struct strbuf *sb, int c, size_t n)
-{
-	strbuf_grow(sb, n);
-	memset(sb->buf + sb->len, c, n);
-	strbuf_setlen(sb, sb->len + n);
-}
-
 static void strbuf_add_indented_text(struct strbuf *buf, const char *text,
 				     int indent, int indent2)
 {
@@ -381,6 +374,9 @@ void strbuf_utf8_replace(struct strbuf *sb_src, int pos, int width,
 			src += n;
 			dst += n;
 		}
+
+		if (src >= end)
+			break;
 
 		old = src;
 		n = utf8_width((const char**)&src, NULL);
@@ -567,8 +563,8 @@ int mbs_chrlen(const char **text, size_t *remainder_p, const char *encoding)
 }
 
 /*
- * Pick the next char from the stream, folding as an HFS+ filename comparison
- * would. Note that this is _not_ complete by any means. It's just enough
+ * Pick the next char from the stream, ignoring codepoints an HFS+ would.
+ * Note that this is _not_ complete by any means. It's just enough
  * to make is_hfs_dotgit() work, and should not be used otherwise.
  */
 static ucs_char_t next_hfs_char(const char **in)
@@ -605,12 +601,7 @@ static ucs_char_t next_hfs_char(const char **in)
 			continue;
 		}
 
-		/*
-		 * there's a great deal of other case-folding that occurs,
-		 * but this is enough to catch anything that will convert
-		 * to ".git"
-		 */
-		return tolower(out);
+		return out;
 	}
 }
 
@@ -618,14 +609,38 @@ int is_hfs_dotgit(const char *path)
 {
 	ucs_char_t c;
 
-	if (next_hfs_char(&path) != '.' ||
-	    next_hfs_char(&path) != 'g' ||
-	    next_hfs_char(&path) != 'i' ||
-	    next_hfs_char(&path) != 't')
+	c = next_hfs_char(&path);
+	if (c != '.')
+		return 0;
+	c = next_hfs_char(&path);
+
+	/*
+	 * there's a great deal of other case-folding that occurs
+	 * in HFS+, but this is enough to catch anything that will
+	 * convert to ".git"
+	 */
+	if (c != 'g' && c != 'G')
+		return 0;
+	c = next_hfs_char(&path);
+	if (c != 'i' && c != 'I')
+		return 0;
+	c = next_hfs_char(&path);
+	if (c != 't' && c != 'T')
 		return 0;
 	c = next_hfs_char(&path);
 	if (c && !is_dir_sep(c))
 		return 0;
 
+	return 1;
+}
+
+const char utf8_bom[] = "\357\273\277";
+
+int skip_utf8_bom(char **text, size_t len)
+{
+	if (len < strlen(utf8_bom) ||
+	    memcmp(*text, utf8_bom, strlen(utf8_bom)))
+		return 0;
+	*text += strlen(utf8_bom);
 	return 1;
 }

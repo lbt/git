@@ -214,6 +214,48 @@ test_expect_success 'tag pointing to something else than its type' '
 	test_must_fail git fsck --tags
 '
 
+test_expect_success 'tag with incorrect tag name & missing tagger' '
+	sha=$(git rev-parse HEAD) &&
+	cat >wrong-tag <<-EOF &&
+	object $sha
+	type commit
+	tag wrong name format
+
+	This is an invalid tag.
+	EOF
+
+	tag=$(git hash-object -t tag -w --stdin <wrong-tag) &&
+	test_when_finished "remove_object $tag" &&
+	echo $tag >.git/refs/tags/wrong &&
+	test_when_finished "git update-ref -d refs/tags/wrong" &&
+	git fsck --tags 2>out &&
+
+	cat >expect <<-EOF &&
+	warning in tag $tag: invalid '\''tag'\'' name: wrong name format
+	warning in tag $tag: invalid format - expected '\''tagger'\'' line
+	EOF
+	test_cmp expect out
+'
+
+test_expect_success 'tag with bad tagger' '
+	sha=$(git rev-parse HEAD) &&
+	cat >wrong-tag <<-EOF &&
+	object $sha
+	type commit
+	tag not-quite-wrong
+	tagger Bad Tagger Name
+
+	This is an invalid tag.
+	EOF
+
+	tag=$(git hash-object --literally -t tag -w --stdin <wrong-tag) &&
+	test_when_finished "remove_object $tag" &&
+	echo $tag >.git/refs/tags/wrong &&
+	test_when_finished "git update-ref -d refs/tags/wrong" &&
+	test_must_fail git fsck --tags 2>out &&
+	grep "error in tag .*: invalid author/committer" out
+'
+
 test_expect_success 'cleaned up' '
 	git fsck >actual 2>&1 &&
 	test_cmp empty actual
@@ -306,6 +348,21 @@ dotgitdot .git.
 dot-backslash-case .\\\\.GIT\\\\foobar
 dotgit-case-backslash .git\\\\foobar
 EOF
+
+test_expect_success 'fsck allows .Ňit' '
+	(
+		git init not-dotgit &&
+		cd not-dotgit &&
+		echo content >file &&
+		git add file &&
+		git commit -m base &&
+		blob=$(git rev-parse :file) &&
+		printf "100644 blob $blob\t.\\305\\207it" >tree &&
+		tree=$(git mktree <tree) &&
+		git fsck 2>err &&
+		test_line_count = 0 err
+	)
+'
 
 # create a static test repo which is broken by omitting
 # one particular object ($1, which is looked up via rev-parse

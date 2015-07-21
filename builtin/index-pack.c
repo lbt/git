@@ -185,6 +185,9 @@ static void cleanup_thread(void)
 #define deepest_delta_lock()
 #define deepest_delta_unlock()
 
+#define type_cas_lock()
+#define type_cas_unlock()
+
 #endif
 
 
@@ -444,7 +447,7 @@ static void *unpack_entry_data(unsigned long offset, unsigned long size,
 	if (type == OBJ_BLOB && size > big_file_threshold)
 		buf = fixed_buf;
 	else
-		buf = xmalloc(size);
+		buf = xmallocz(size);
 
 	memset(&stream, 0, sizeof(stream));
 	git_inflate_init(&stream);
@@ -549,7 +552,7 @@ static void *unpack_data(struct object_entry *obj,
 	git_zstream stream;
 	int status;
 
-	data = xmalloc(consume ? 64*1024 : obj->size);
+	data = xmallocz(consume ? 64*1024 : obj->size);
 	inbuf = xmalloc((len < 64*1024) ? len : 64*1024);
 
 	memset(&stream, 0, sizeof(stream));
@@ -779,7 +782,8 @@ static void sha1_object(const void *data, struct object_entry *obj_entry,
 			if (!obj)
 				die(_("invalid %s"), typename(type));
 			if (do_fsck_object &&
-			    fsck_object(obj, 1, fsck_error_function))
+			    fsck_object(obj, buf, size, 1,
+				    fsck_error_function))
 				die(_("Error in object"));
 			if (fsck_walk(obj, mark_link, NULL))
 				die(_("Not all child objects of %s are reachable"), sha1_to_hex(obj->sha1));
@@ -1169,9 +1173,7 @@ static void conclude_pack(int fix_thin_pack, const char *curr_pack, unsigned cha
 		int nr_objects_initial = nr_objects;
 		if (nr_unresolved <= 0)
 			die(_("confusion beyond insanity"));
-		objects = xrealloc(objects,
-				   (nr_objects + nr_unresolved + 1)
-				   * sizeof(*objects));
+		REALLOC_ARRAY(objects, nr_objects + nr_unresolved + 1);
 		memset(objects + nr_objects + 1, 0,
 		       nr_unresolved * sizeof(*objects));
 		f = sha1fd(output_fd, curr_pack);
@@ -1202,7 +1204,6 @@ static int write_compressed(struct sha1file *f, void *in, unsigned int size)
 	int status;
 	unsigned char outbuf[4096];
 
-	memset(&stream, 0, sizeof(stream));
 	git_deflate_init(&stream, zlib_compression_level);
 	stream.next_in = in;
 	stream.avail_in = size;

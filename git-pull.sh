@@ -20,7 +20,7 @@ die_conflict () {
     if [ $(git config --bool --get advice.resolveConflict || echo true) = "true" ]; then
 	die "$(gettext "Pull is not possible because you have unmerged files.
 Please, fix them up in the work tree, and then use 'git add/rm <file>'
-as appropriate to mark resolution, or use 'git commit -a'.")"
+as appropriate to mark resolution and make a commit.")"
     else
 	die "$(gettext "Pull is not possible because you have unmerged files.")"
     fi
@@ -54,8 +54,11 @@ then
 fi
 
 # Setup default fast-forward options via `pull.ff`
-pull_ff=$(git config pull.ff)
+pull_ff=$(bool_or_string_config pull.ff)
 case "$pull_ff" in
+true)
+	no_ff=--ff
+	;;
 false)
 	no_ff=--no-ff
 	;;
@@ -81,8 +84,8 @@ do
 		diffstat=--no-stat ;;
 	--stat|--summary)
 		diffstat=--stat ;;
-	--log|--no-log)
-		log_arg=$1 ;;
+	--log|--log=*|--no-log)
+		log_arg="$1" ;;
 	--no-c|--no-co|--no-com|--no-comm|--no-commi|--no-commit)
 		no_commit=--no-commit ;;
 	--c|--co|--com|--comm|--commi|--commit)
@@ -190,15 +193,6 @@ esac
 
 error_on_no_merge_candidates () {
 	exec >&2
-	for opt
-	do
-		case "$opt" in
-		-t|--t|--ta|--tag|--tags)
-			echo "It doesn't make sense to pull all tags; you probably meant:"
-			echo "  git fetch --tags"
-			exit 1
-		esac
-	done
 
 	if test true = "$rebase"
 	then
