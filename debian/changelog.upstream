@@ -1,3 +1,2253 @@
+Version v2.4.6; changes since v2.4.5:
+-------------------------------------
+
+Ariel Faigon (1):
+      git-completion.tcsh: fix redirect with noclobber
+
+Charles Bailey (1):
+      Fix definition of ARRAY_SIZE for non-gcc builds
+
+Eric Sunshine (2):
+      ewah/bitmap: silence warning about MASK macro redefinition
+      utf8: NO_ICONV: silence uninitialized variable warning
+
+Frans Klaver (1):
+      doc: format-patch: fix typo
+
+Jeff King (2):
+      ewah: use less generic macro name
+      Revert "stash: require a clean index to apply"
+
+Joe Cridge (1):
+      git-prompt.sh: document GIT_PS1_STATESEPARATOR
+
+Junio C Hamano (2):
+      format-patch: do not feed tags to clear_commit_marks()
+      Git 2.4.6
+
+Matthieu Moy (1):
+      Documentation/describe: improve one-line summary
+
+Michael Haggerty (2):
+      fsck_handle_reflog_sha1(): new function
+      fsck: report errors if reflog entries point at invalid objects
+
+Mike Edgar (1):
+      fetch-pack: check for shallow if depth given
+
+Panagiotis Astithas (1):
+      hooks/pre-auto-gc: adjust power checking for newer OS X
+
+Paul Tan (1):
+      t0302: "unreadable" test needs SANITY prereq
+
+
+Version v2.4.5; changes since v2.4.4:
+-------------------------------------
+
+Jeff King (13):
+      diff: accept color.diff.context as a synonym for "plain"
+      diff.h: rename DIFF_PLAIN color slot to DIFF_CONTEXT
+      read-cache.c: drop PROT_WRITE from mmap of index
+      config.c: fix mmap leak when writing config
+      config.c: avoid xmmap error messages
+      config.c: rewrite ENODEV into EISDIR when mmap fails
+      Makefile: drop dependency between git-instaweb and gitweb
+      Makefile: avoid timestamp updates to GIT-BUILD-OPTIONS
+      Makefile: silence perl/PM.stamp recipe
+      setup_git_directory: delay core.bare/core.worktree errors
+      add quieter versions of parse_{tree,commit}
+      silence broken link warnings with revs->ignore_missing_links
+      suppress errors on missing UNINTERESTING links
+
+Junio C Hamano (3):
+      t5407: use <<- to align the expected output
+      xmmap(): drop "Out of memory?"
+      Git 2.4.5
+
+Matthieu Moy (2):
+      rebase -i: demonstrate incorrect behavior of post-rewrite
+      rebase -i: fix post-rewrite hook with failed exec command
+
+Paul Tan (1):
+      pull: remove --tags error in no merge candidates case
+
+SZEDER Gábor (1):
+      Documentation: include 'merge.branchdesc' for merge and config as well
+
+Stefan Beller (1):
+      Documentation/technical/pack-protocol: mention http as possible protocol
+
+
+Version v2.4.4; changes since v2.4.3:
+-------------------------------------
+
+Alex Henrie (1):
+      blame, log: format usage strings similarly to those in documentation
+
+David Turner (1):
+      clean: only lstat files in pathspec
+
+Elia Pinto (1):
+      git-compat-util.h: implement a different ARRAY_SIZE macro for for safely deriving the size of array
+
+Jeff King (8):
+      http-backend: fix die recursion with custom handler
+      t5551: factor out tag creation
+      stash: complain about unknown flags
+      stash: recognize "--help" for subcommands
+      test_bitmap_walk: free bitmap with bitmap_free
+      http-backend: spool ref negotiation requests to buffer
+      clone: use OPT_STRING_LIST for --reference
+      clone: reorder --dissociate and --reference options
+
+Jim Hill (1):
+      sha1_file: pass empty buffer to index empty file
+
+Junio C Hamano (1):
+      Git 2.4.4
+
+Matthieu Moy (2):
+      Documentation/log: clarify what --raw means
+      Documentation/log: clarify sha1 non-abbreviation in log --raw
+
+Michael Coleman (1):
+      Documentation/git-commit: grammofix
+
+Michael J Gruber (3):
+      l10n: de.po: grammar fix
+      l10n: de.po: punctuation fixes
+      l10n: de.po: translation fix for fall-back to 3way merge
+
+Phillip Sz (1):
+      l10n: de.po: change error message from "sagen" to "Meinten Sie"
+
+René Scharfe (3):
+      use file_exists() to check if a file exists in the worktree
+      clean: remove unused variable buf
+      dir: remove unused variable sb
+
+Stefan Beller (2):
+      submodule doc: reorder introductory paragraphs
+      glossary: add "remote", "submodule", "superproject"
+
+
+Version v2.4.3; changes since v2.4.2:
+-------------------------------------
+
+Danny Lin (1):
+      branch: do not call a "remote-tracking branch" a "remote branch"
+
+Fredrik Gustafsson (1):
+      Documentation: clarify how "git commit" cleans up the edited log message
+
+Jean-Noel Avila (1):
+      doc: fix unmatched code fences
+
+Jeff King (14):
+      sha1_file: squelch "packfile cannot be accessed" warnings
+      t/lib-httpd.sh: skip tests if NO_CURL is defined
+      add: check return value of launch_editor
+      doc: fix unmatched code fences in git-stripspace
+      doc: fix misrendering due to `single quote'
+      doc: fix unquoted use of "{type}"
+      doc: fix hanging "+"-continuation
+      doc: fix length of underlined section-title
+      doc/add: reformat `--edit` option
+      doc: convert \--option to --option
+      doc: drop backslash quoting of some curly braces
+      doc: put example URLs and emails inside literal backticks
+      doc: convert AsciiDoc {?foo} to ifdef::foo[]
+      rerere: exit silently on "forget" when rerere is disabled
+
+Junio C Hamano (7):
+      t0302: "unreadable" test needs POSIXPERM
+      fmt-merge-msg: plug small leak of commit buffer
+      ignore: info/exclude should trump core.excludesfile
+      tests: skip dav http-push tests under NO_EXPAT=NoThanks
+      log: decorate HEAD with branch name under --decorate=full, too
+      log: do not shorten decoration names too early
+      Git 2.4.3
+
+Michael Haggerty (30):
+      t1404: new tests of ref D/F conflicts within transactions
+      is_refname_available(): revamp the comments
+      is_refname_available(): avoid shadowing "dir" variable
+      is_refname_available(): convert local variable "dirname" to strbuf
+      entry_matches(): inline function
+      report_refname_conflict(): inline function
+      struct nonmatching_ref_data: store a refname instead of a ref_entry
+      is_refname_available(): use dirname in first loop
+      ref_transaction_commit(): use a string_list for detecting duplicates
+      refs: check for D/F conflicts among refs created in a transaction
+      verify_refname_available(): rename function
+      verify_refname_available(): report errors via a "struct strbuf *err"
+      lock_ref_sha1_basic(): report errors via a "struct strbuf *err"
+      lock_ref_sha1_basic(): improve diagnostics for ref D/F conflicts
+      rename_ref(): integrate lock_ref_sha1_basic() errors into ours
+      ref_transaction_commit(): provide better error messages
+      ref_transaction_commit(): delete extra "the" from error message
+      reflog_expire(): integrate lock_ref_sha1_basic() errors into ours
+      write_ref_to_lockfile(): new function, extracted from write_ref_sha1()
+      commit_ref_update(): new function, extracted from write_ref_sha1()
+      rename_ref(): inline calls to write_ref_sha1() from this function
+      ref_transaction_commit(): inline call to write_ref_sha1()
+      ref_transaction_commit(): remove the local flags variable
+      ref_transaction_commit(): fix atomicity and avoid fd exhaustion
+      write_ref_to_lockfile(): new function, extracted from write_ref_sha1()
+      commit_ref_update(): new function, extracted from write_ref_sha1()
+      rename_ref(): inline calls to write_ref_sha1() from this function
+      ref_transaction_commit(): inline call to write_ref_sha1()
+      ref_transaction_commit(): remove the local flags variable
+      ref_transaction_commit(): fix atomicity and avoid fd exhaustion
+
+Mike Hommey (1):
+      clone: call transport_set_verbosity before anything else on the newly created transport
+
+Patrick Steinhardt (5):
+      bundle: verify arguments more strictly
+      git-verify-pack.txt: fix inconsistent spelling of "packfile"
+      git-unpack-objects.txt: fix inconsistent spelling of "packfile"
+      pack-protocol.txt: fix insconsistent spelling of "packfile"
+      doc: fix inconsistent spelling of "packfile"
+
+Paul Tan (13):
+      git-credential-store: support multiple credential files
+      git-credential-store: support XDG_CONFIG_HOME
+      t0302: test credential-store support for XDG_CONFIG_HOME
+      path.c: implement xdg_config_home()
+      attr.c: replace home_config_paths() with xdg_config_home()
+      dir.c: replace home_config_paths() with xdg_config_home()
+      credential-store.c: replace home_config_paths() with xdg_config_home()
+      git-commit: replace use of home_config_paths()
+      git-config: replace use of home_config_paths()
+      path.c: remove home_config_paths()
+      pull: handle --log=<n>
+      pull: make pull.ff=true override merge.ff
+      pull: parse pull.ff as a bool or string
+
+Phil Hord (1):
+      rebase -i: redo tasks that die during cherry-pick
+
+René Scharfe (1):
+      pack-bitmaps: plug memory leak, fix allocation size for recent_bitmaps
+
+Stefan Beller (5):
+      update-ref: test handling large transactions properly
+      t7004: rename ULIMIT test prerequisite to ULIMIT_STACK_SIZE
+      update-ref: test handling large transactions properly
+      t7004: rename ULIMIT test prerequisite to ULIMIT_STACK_SIZE
+      subdirectory tests: code cleanup, uncomment test
+
+Torsten Bögershausen (1):
+      blame: CRLF in the working tree and LF in the repo
+
+brian m. carlson (3):
+      connect: simplify SSH connection code path
+      t5601: fix quotation error leading to skipped tests
+      connect: improve check for plink to reduce false positives
+
+
+Version v2.4.2; changes since v2.4.1:
+-------------------------------------
+
+Eric Sunshine (3):
+      git-hash-object.txt: document --literally option
+      hash-object --literally: fix buffer overrun with extra-long object type
+      t1007: add hash-object --literally tests
+
+Jeff King (7):
+      limit_list: avoid quadratic behavior from still_interesting
+      t3903: stop hard-coding commit sha1s
+      t3903: avoid applying onto dirty index
+      stash: require a clean index to apply
+      stop putting argv[0] dirname at front of PATH
+      rebase: silence "git checkout" for noop rebase
+      filter-branch: avoid passing commit message through sed
+
+Junio C Hamano (3):
+      write_sha1_file(): do not use a separate sha1[] array
+      daemon: unbreak NO_IPV6 build regression
+      Git 2.4.2
+
+SZEDER Gábor (1):
+      completion: fix and update 'git log --decorate=' options
+
+
+Version v2.4.1; changes since v2.4.0:
+-------------------------------------
+
+Carlos Martín Nieto (1):
+      dir: allow a BOM at the beginning of exclude files
+
+Elia Pinto (1):
+      test-lib-functions.sh: fix the second argument to some helper functions
+
+Jeff King (5):
+      init: don't set core.worktree when initializing /.git
+      type_from_string_gently: make sure length matches
+      reachable: only mark local objects as recent
+      sha1_file: freshen pack objects before loose
+      sha1_file: only freshen packs once per run
+
+Junio C Hamano (10):
+      diff-no-index: DWIM "diff D F" into "diff D/F F"
+      diff-no-index: align D/F handling with that of normal Git
+      parse_date_basic(): return early when given a bogus timestamp
+      parse_date_basic(): let the system handle DST conversion
+      add_excludes_from_file: clarify the bom skipping logic
+      utf8-bom: introduce skip_utf8_bom() helper
+      config: use utf8_bom[] from utf.[ch] in git_parse_source()
+      attr: skip UTF8 BOM at the beginning of the input file
+      Git 2.3.8
+      Git 2.4.1
+
+Matthieu Moy (2):
+      Documentation: change -L:<regex> to -L:<funcname>
+      log -L: improve error message on malformed argument
+
+Nguyễn Thái Ngọc Duy (1):
+      t1509: update prepare script to be able to run t1509 in chroot again
+
+Ossi Herrala (1):
+      config: fix settings in default_user_config template
+
+Stefan Beller (2):
+      line-log.c: fix a memleak
+      pack-bitmap.c: fix a memleak
+
+
+Version v2.4.0; changes since v2.4.0-rc3:
+-----------------------------------------
+
+Junio C Hamano (2):
+      Git 2.3.7
+      Git 2.4
+
+Michael Haggerty (6):
+      git tag: mention versionsort.prereleaseSuffix in manpage
+      RelNotes: correct name of versionsort.prereleaseSuffix
+      RelNotes: refer to the rebase -i "todo list", not "insn sheet"
+      RelNotes: wordsmithing
+      status: document the -v/--verbose option
+      Update git-multimail to version 1.0.2
+
+Michael J Gruber (1):
+      rev-list-options.txt: complete sentence about notes matching
+
+
+Version v2.4.0-rc3; changes since v2.4.0-rc2:
+---------------------------------------------
+
+Alexander Shopov (2):
+      git-gui i18n: Updated Bulgarian translation (520t,0f,0u)
+      git-gui i18n: Updated Bulgarian translation (547t,0f,0u)
+
+Csaba Kiraly (1):
+      git-gui: fix problem with gui.maxfilesdisplayed
+
+David Turner (1):
+      git-gui: Make git-gui lib dir configurable at runime
+
+Henri GEIST (1):
+      git-gui: Add a 'recursive' checkbox in the clone menu.
+
+Junio C Hamano (6):
+      push --signed: tighten what the receiving end can ask to sign
+      Revert "merge: pass verbosity flag down to merge-recursive"
+      Hopefully the last batch for 2.4
+      RelNotes: "merge --quiet" change has been reverted
+      Git 2.3.6
+      Git 2.4.0-rc3
+
+Kyle J. McKay (1):
+      git-gui: reinstate support for Tcl 8.4
+
+Michael Lutz (1):
+      git-gui: add configurable tab size to the diff view
+
+Márcio Almada (1):
+      completion: fix global bash variable leak on __gitcompappend
+
+Pat Thoyts (3):
+      git-gui: align the new recursive checkbox with the radiobuttons.
+      git-gui: fix verbose loading when git path contains spaces.
+      git-gui: set version 0.20
+
+Patrick Steinhardt (1):
+      grep: correctly initialize help-all option
+
+Peter Krefting (1):
+      git-gui: sv.po: Update Swedish translation (547t0f0u)
+
+Remi Rampin (2):
+      git-gui: Fixes chooser not accepting gitfiles
+      git-gui: Makes chooser set 'gitdir' to the resolved path
+
+Sebastian Schuberth (1):
+      git-gui/gitk: Do not depend on Cygwin's "kill" command on Windows
+
+Torsten Bögershausen (1):
+      connect.c: ignore extra colon after hostname
+
+Trần Ngọc Quân (1):
+      L10n: vi.po (543t): Init translation for Vietnamese
+
+Vitor Antunes (3):
+      t9814: fix broken shell syntax in git-p4 rename test
+      git-p4: fix copy detection test
+      t9814: guarantee only one source exists in git-p4 copy tests
+
+
+Version v2.4.0-rc2; changes since v2.4.0-rc1:
+---------------------------------------------
+
+Alex Henrie (2):
+      l10n: ca.po: update translation
+      l10n: ca.po: update translation
+
+Alexander Shopov (1):
+      l10n: Updated Bulgarian translation of git (2305t,0f,0u)
+
+Dimitriy Ryazantcev (3):
+      l10n: ru: added Russian translation
+      l10n: ru: updated Russian translation
+      l10n: ru: updated Russian translation
+
+Ivan Ukhov (1):
+      parse-options.h: OPTION_{BIT,SET_INT} do not store pointer to defval
+
+Jean-Noel Avila (2):
+      l10n: fr.po v2.4.0-rc0 round 1
+      l10n: fr.po v2.4.0 round 2
+
+Jeff King (3):
+      cherry-pick: fix docs describing handling of empty commits
+      howto: document more tools for recovery corruption
+      merge: pass verbosity flag down to merge-recursive
+
+Jiang Xin (5):
+      l10n: git.pot: v2.4.0 round 1 (99 new, 92 removed)
+      l10n: zh_CN: translations for git v2.4.0-rc0
+      l10n: git.pot: v2.4.0 round 2 (1 update)
+      l10n: zh_CN: for git v2.4.0 l10n round 2
+      l10n: TEAMS: Change repository URL of zh_CN
+
+John Keeping (1):
+      streaming.c: fix a memleak
+
+Jonathan Nieder (1):
+      fast-import doc: remove suggested 16-parent limit
+
+Julian Gindi (1):
+      CodingGuidelines: update 'rough' rule count
+
+Junio C Hamano (2):
+      push-to-deploy: allow pushing into an unborn branch and updating it
+      Git 2.4.0-rc2
+
+Jérôme Zago (1):
+      gitweb.conf.txt: say "build-time", not "built-time"
+
+Kyle J. McKay (1):
+      diff-highlight: do not split multibyte characters
+
+Matthias Rüster (1):
+      l10n: de.po: translate 'symbolic link' as 'symbolische Verknüpfung'
+
+Michael J Gruber (1):
+      l10n: de.po: fix negation for commit -a with paths
+
+Paul Tan (1):
+      enter_repo(): fix docs to match code
+
+Peter Krefting (2):
+      l10n: sv.po: Update Swedish translation (2305t0f0u)
+      l10n: sv.po: Update Swedish translation (2305t0f0u)
+
+Phillip Sz (1):
+      l10n: de.po: add space before ellipsis
+
+Ralf Thielow (3):
+      l10n: de.po: fix messages with abbreviated hashs
+      l10n: de.po: translate 99 new messages
+      l10n: de.po: translate one message
+
+Stefan Beller (1):
+      wt-status.c: fix a memleak
+
+Trần Ngọc Quân (2):
+      l10n: vi.po: Updated Vietnamese translation
+      l10n: vi.po(2305t): Updated 1 new string
+
+
+Version v2.4.0-rc1; changes since v2.4.0-rc0:
+---------------------------------------------
+
+Junio C Hamano (6):
+      add_to_index(): free unused cache-entry
+      Update mailmap to spell out "Alexander Kuleshov"
+      Prepare for 2.3.5
+      RelNotes: minor doc updates
+      Git 2.3.5
+      Git 2.4.0-rc1
+
+Phil Hord (1):
+      git-push.txt: clean up force-with-lease wording
+
+Ralf Thielow (1):
+      send-pack: unify error messages for unsupported capabilities
+
+Sebastian Schuberth (2):
+      docs: clarify "preserve" option wording for git-pull
+      docs: clarify what git-rebase's "-p" / "--preserve-merges" does
+
+Stefan Beller (9):
+      read-cache: free cache entry in add_to_index in case of early return
+      update-index: fix a memleak
+      builtin/apply.c: fix a memleak
+      merge-blobs.c: fix a memleak
+      merge-recursive: fix memleaks
+      http-push: remove unneeded cleanup
+      commit.c: fix a memory leak
+      read-cache: fix memleak
+      http: release the memory of a http pack request as well
+
+Thomas Ackermann (2):
+      api-error-handling doc: typofix
+      2.3.2 release notes: typofix
+
+
+Version v2.4.0-rc0; changes since v2.3.8:
+-----------------------------------------
+
+Alex Henrie (3):
+      standardize usage info string format
+      gitk: Remove tcl-format flag from a message that shouldn't have it
+      gitk: l10n: Add Catalan translation
+
+Alexander Kuleshov (3):
+      pack-bitmap: fix typo
+      t/lib-terminal.sh: fix typo
+      gitk: Fix typo in Russian translation
+
+Chris Packham (1):
+      gitk: Default wrcomcmd to use --pretty=email
+
+Christoph Junghans (2):
+      log: teach --invert-grep option
+      gitk: Pass --invert-grep option down to "git log"
+
+Dave Olszewski (1):
+      push: allow --follow-tags to be set by config push.followTags
+
+Dongcan Jiang (1):
+      revision: forbid combining --graph and --no-walk
+
+Eric Wong (1):
+      git-svn: lazy load some modules
+
+Gabriele Mazzotta (1):
+      gitk: Enable mouse horizontal scrolling in diff pane
+
+Jean-Noel Avila (1):
+      Add hint interactive cleaning
+
+Jeff King (50):
+      strbuf.h: integrate api-strbuf.txt documentation
+      strbuf.h: drop asciidoc list formatting from API docs
+      strbuf.h: format asciidoc code blocks as 4-space indent
+      strbuf.h: reorganize api function grouping headers
+      strbuf.h: drop boilerplate descriptions of strbuf_split_*
+      strbuf.h: group documentation for trim functions
+      git_push_config: drop cargo-culted wt_status pointer
+      cmd_push: set "atomic" bit directly
+      cmd_push: pass "flags" pointer to config callback
+      gettext.c: move get_preferred_languages() from http.c
+      t/test-lib: introduce --chain-lint option
+      t: fix severe &&-chain breakage
+      t: fix moderate &&-chain breakage
+      t: fix trivial &&-chain breakage
+      t: assume test_cmp produces verbose output
+      t: use verbose instead of hand-rolled errors
+      t: use test_must_fail instead of hand-rolled blocks
+      t: fix &&-chaining issues around setup which might fail
+      t: use test_might_fail for diff and grep
+      t: use test_expect_code instead of hand-rolled comparison
+      t: wrap complicated expect_code users in a block
+      t: avoid using ":" for comments
+      t3600: fix &&-chain breakage for setup commands
+      t7201: fix &&-chain breakage
+      t9502: fix &&-chain breakage
+      t6030: use modern test_* helpers
+      t0020: use modern test_* helpers
+      t1301: use modern test_* helpers
+      t6034: use modern test_* helpers
+      t4117: use modern test_* helpers
+      t9001: use test_when_finished
+      t0050: appease --chain-lint
+      t7004: fix embedded single-quotes
+      t0005: fix broken &&-chains
+      t4104: drop hand-rolled error reporting
+      wt-status: don't flush before running "submodule status"
+      wt_status: fix signedness mismatch in strbuf_read call
+      run-command: introduce capture_command helper
+      wt-status: use capture_command
+      submodule: use capture_command
+      trailer: use capture_command
+      run-command: forbid using run_command with piped output
+      perf-lib: fix ignored exit code inside loop
+      t0020: fix ignored exit code inside loops
+      t3305: fix ignored exit code inside loop
+      t7701: fix ignored exit code inside loop
+      t: fix some trivial cases of ignored exit codes in loops
+      t: simplify loop exit-code status variables
+      t0020: use test_* helpers instead of hand-rolled messages
+      t9001: drop save_confirm helper
+
+Jonathan Nieder (1):
+      doc: document error handling functions and conventions
+
+Junio C Hamano (33):
+      receive-pack: refactor updateInstead codepath
+      receive-pack: support push-to-checkout hook
+      http.c: make finish_active_slot() and handle_curl_result() static
+      prompt.c: remove git_getpass() nobody uses
+      pack-bitmap.c: make pack_bitmap_filename() static
+      line-log.c: make line_log_data_init() static
+      revision.c: make save_parents() and free_saved_parents() static
+      urlmatch.c: make match_urls() static
+      remote.c: make clear_cas_option() static
+      shallow.c: make check_shallow_file_for_update() static
+      CodingGuidelines: clarify C #include rules
+      "log --pretty" documentation: do not forget "tformat:"
+      apply: detect and mark whitespace errors in context lines when fixing
+      t4122: use test_write_lines from test-lib-functions
+      run_diff_files(): clarify computation of sha1 validity
+      Post 2.3 cycle (batch #1)
+      xread/xwrite: clip MAX_IO_SIZE to SSIZE_MAX
+      send-email: ask confirmation if given encoding name is very short
+      Post 2.3 cycle (batch #2)
+      Post 2.3 cycle (batch #3)
+      Post 2.3 cycle (batch #4)
+      Post 2.3 cyle (batch #5)
+      Post 2.3 cycle (batch #6)
+      Post 2.3 cycle (batch #7)
+      t7508: .gitignore 'expect' and 'output' files
+      Post 2.3 cycle (batch #8)
+      Post 2.3 cycle (batch #9)
+      log: decorate HEAD with branch name
+      Post 2.3 cyce (batch #10)
+      Post 2.3 cycle (batch #11)
+      Post 2.3 cycle (batch #12)
+      Getting ready for -rc0
+      Git 2.4.0-rc0
+
+Kevin Daudt (1):
+      rev-list: refuse --first-parent combined with --bisect
+
+Kyle J. McKay (8):
+      gettext.h: add parentheses around N_ expansion if supported
+      git-instaweb: allow running in a working tree subdirectory
+      git-instaweb: use @SHELL_PATH@ instead of /bin/sh
+      git-compat-util.h: move SHELL_PATH default into header
+      help.c: use SHELL_PATH instead of hard-coded "/bin/sh"
+      configure: support HAVE_BSD_SYSCTL option
+      thread-utils.c: detect CPU count on older BSD-like systems
+      t5528: do not fail with FreeBSD shell
+
+Luke Diamand (2):
+      git-p4: correct --prepare-p4-only instructions
+      git-p4: support excluding paths on sync
+
+Max Kirillov (3):
+      gitk: Only write changed configuration variables
+      gitk: Report errors in saving config file
+      gitk: Synchronize config file writes
+
+Michael Haggerty (37):
+      expire_reflog(): it's not an each_ref_fn anymore
+      expire_reflog(): rename "ref" parameter to "refname"
+      expire_reflog(): return early if the reference has no reflog
+      expire_reflog(): use a lock_file for rewriting the reflog file
+      Extract function should_expire_reflog_ent()
+      expire_reflog(): extract two policy-related functions
+      expire_reflog(): add a "flags" argument
+      expire_reflog(): move dry_run to flags argument
+      expire_reflog(): move updateref to flags argument
+      Rename expire_reflog_cb to expire_reflog_policy_cb
+      struct expire_reflog_cb: a new callback data type
+      expire_reflog(): pass flags through to expire_reflog_ent()
+      expire_reflog(): move verbose to flags argument
+      expire_reflog(): move rewrite to flags argument
+      Move newlog and last_kept_sha1 to "struct expire_reflog_cb"
+      expire_reflog(): treat the policy callback data as opaque
+      reflog_expire(): new function in the reference API
+      lock_any_ref_for_update(): inline function
+      refs: move REF_DELETING to refs.c
+      refs: remove the gap in the REF_* constant values
+      refs.c: change some "flags" to "unsigned int"
+      struct ref_update: move "have_old" into "flags"
+      ref_transaction_update(): remove "have_old" parameter
+      ref_transaction_delete(): remove "have_old" parameter
+      commit: add tests of commit races
+      commit: avoid race when creating orphan commits
+      ref_transaction_create(): check that new_sha1 is valid
+      ref_transaction_delete(): check that old_sha1 is not null_sha1
+      ref_transaction_verify(): new function to check a reference's value
+      update_ref(): improve documentation
+      refs.h: remove duplication in function docstrings
+      write_ref_sha1(): remove check for lock == NULL
+      write_ref_sha1(): move write elision test to callers
+      lock_ref_sha1_basic(): do not set force_write for missing references
+      reflog: improve and update documentation
+      reflog_expire(): ignore --updateref for symbolic references
+      reflog_expire(): never update a reference to null_sha1
+
+Michael J Gruber (7):
+      t7508: test git status -v
+      commit/status: show the index-worktree diff with -v -v
+      sequencer: preserve commit messages
+      wt-status: refactor detached HEAD analysis
+      branch: name detached HEAD analogous to status
+      t9104: fix test for following larger parents
+      t9158, t9161: fix broken &&-chain in git-svn tests
+
+Mike Hommey (2):
+      transport-helper: ask the helper to set progress and verbosity options after asking for its capabilities
+      transport-helper: ask the helper to set the same options for import as for fetch
+
+Nguyễn Thái Ngọc Duy (6):
+      attr.c: rename arg name attr_nr to avoid shadowing the global one
+      attr: do not attempt to expand when we know it's not a macro
+      attr: avoid heavy work when we know the specified attr is not defined
+      versionsort: support reorder prerelease suffixes
+      config.txt: update versioncmp.prereleaseSuffix
+      *config.txt: stick to camelCase naming convention
+
+Paul Mackerras (1):
+      gitk: Update .po files
+
+René Scharfe (3):
+      archive-zip: mark text files in archives
+      daemon: use strbuf for hostname info
+      daemon: deglobalize hostname information
+
+Ronnie Sahlberg (7):
+      refs.c: make ref_transaction_create a wrapper for ref_transaction_update
+      refs.c: make ref_transaction_delete a wrapper for ref_transaction_update
+      refs.c: add a function to append a reflog entry to a fd
+      refs.c: remove unlock_ref/close_ref/commit_ref from the refs api
+      receive-pack.c: negotiate atomic push support
+      send-pack.c: add --atomic command line argument
+      push.c: add an --atomic argument
+
+Sebastian Schuberth (1):
+      check-builtins: strip executable suffix $X when enumerating builtins
+
+Stefan Beller (15):
+      refs.c: don't expose the internal struct ref_lock in the header file
+      refs.c: let fprintf handle the formatting
+      receive-pack.c: shorten the execute_commands loop over all commands
+      receive-pack.c: die instead of error in case of possible future bug
+      receive-pack.c: move iterating over all commands outside execute_commands
+      receive-pack.c: move transaction handling in a central place
+      receive-pack.c: add execute_commands_atomic function
+      send-pack: rename ref_update_to_be_sent to check_to_send_update
+      t5543-atomic-push.sh: add basic tests for atomic pushes
+      Document receive.advertiseatomic
+      strbuf.h: unify documentation comments beginnings
+      struct ref_lock: delete the force_write member
+      connect.c: do not leak "conn" after showing diagnosis
+      bundle.c: fix memory leak
+      builtin/help.c: fix memory leak
+
+Tom G. Christensen (1):
+      http: support curl < 7.10.7
+
+Torsten Bögershausen (1):
+      t6039: fix broken && chain
+
+Yi EungJun (1):
+      http: add Accept-Language header if possible
+
+
+Version v2.3.8; changes since v2.3.7:
+-------------------------------------
+
+Junio C Hamano (5):
+      diff-no-index: DWIM "diff D F" into "diff D/F F"
+      diff-no-index: align D/F handling with that of normal Git
+      parse_date_basic(): return early when given a bogus timestamp
+      parse_date_basic(): let the system handle DST conversion
+      Git 2.3.8
+
+Matthieu Moy (2):
+      Documentation: change -L:<regex> to -L:<funcname>
+      log -L: improve error message on malformed argument
+
+Ossi Herrala (1):
+      config: fix settings in default_user_config template
+
+
+Version v2.3.7; changes since v2.3.6:
+-------------------------------------
+
+Junio C Hamano (2):
+      push --signed: tighten what the receiving end can ask to sign
+      Git 2.3.7
+
+Márcio Almada (1):
+      completion: fix global bash variable leak on __gitcompappend
+
+Torsten Bögershausen (1):
+      connect.c: ignore extra colon after hostname
+
+
+Version v2.3.6; changes since v2.3.5:
+-------------------------------------
+
+Ivan Ukhov (1):
+      parse-options.h: OPTION_{BIT,SET_INT} do not store pointer to defval
+
+Jeff King (7):
+      t: translate SIGINT to an exit
+      t: redirect stderr GIT_TRACE to descriptor 4
+      t: pass GIT_TRACE through Apache
+      t5541: move run_with_cmdline_limit to test-lib.sh
+      t5551: make EXPENSIVE test cheaper
+      cherry-pick: fix docs describing handling of empty commits
+      howto: document more tools for recovery corruption
+
+Jonathan Nieder (1):
+      fast-import doc: remove suggested 16-parent limit
+
+Julian Gindi (1):
+      CodingGuidelines: update 'rough' rule count
+
+Junio C Hamano (1):
+      Git 2.3.6
+
+Jérôme Zago (1):
+      gitweb.conf.txt: say "build-time", not "built-time"
+
+Kyle J. McKay (1):
+      diff-highlight: do not split multibyte characters
+
+Paul Tan (1):
+      enter_repo(): fix docs to match code
+
+
+Version v2.3.5; changes since v2.3.4:
+-------------------------------------
+
+Cody A Taylor (1):
+      git prompt: use toplevel to find untracked files
+
+Jeff King (15):
+      tag: fix some mis-organized options in "-h" listing
+      upload-pack: fix transfer.hiderefs over smart-http
+      upload-pack: do not check NULL return of lookup_unknown_object
+      sha1fd_check: die when we cannot open the file
+      clone: initialize atexit cleanup handler earlier
+      clone: drop period from end of die_errno message
+      filter_ref: avoid overwriting ref->old_sha1 with garbage
+      filter_ref: make a copy of extra "sought" entries
+      fetch_refs_via_pack: free extra copy of refs
+      fetch-pack: remove dead assignment to ref->new_sha1
+      t5312: test object deletion code paths in a corrupted repository
+      refs: introduce a "ref paranoia" flag
+      prune: turn on ref_paranoia flag
+      repack: turn on "ref paranoia" when doing a destructive repack
+      refs.c: drop curate_packed_refs
+
+John Szakmeister (1):
+      contrib/completion: escape the forward slash in __git_match_ctag
+
+Junio C Hamano (5):
+      SubmittingPatches: encourage users to use format-patch and send-email
+      report_path_error(): move to dir.c
+      Update mailmap to spell out "Alexander Kuleshov"
+      Prepare for 2.3.5
+      Git 2.3.5
+
+Nguyễn Thái Ngọc Duy (1):
+      git.txt: list index versions in plain English
+
+Phil Hord (1):
+      git-push.txt: clean up force-with-lease wording
+
+SZEDER Gábor (1):
+      completion: use __gitcomp_nl() for completing refs
+
+Sebastian Schuberth (2):
+      docs: clarify "preserve" option wording for git-pull
+      docs: clarify what git-rebase's "-p" / "--preserve-merges" does
+
+Thomas Ackermann (1):
+      2.3.2 release notes: typofix
+
+Thomas Gummerer (2):
+      t1700: make test pass with index-v4
+      read-cache: fix reading of split index
+
+Wilhelm Schuermann (1):
+      grep: fix "--quiet" overwriting current output
+
+
+Version v2.3.4; changes since v2.3.3:
+-------------------------------------
+
+Alexander Kuleshov (1):
+      git: make was_alias and done_help non-static
+
+Eric Sunshine (2):
+      rebase-interactive: suppress whitespace preceding item count
+      rebase-interactive: re-word "item count" comment
+
+Junio C Hamano (8):
+      Documentation/config.txt: avoid unnecessary negation
+      Documentation/config.txt: explain multi-valued variables once
+      Documentation/config.txt: describe the structure first and then meaning
+      Documentation/config.txt: have a separate "Values" section
+      Documentation/config.txt: describe 'color' value type in the "Values" section
+      Documentation/config.txt: simplify boolean description in the syntax section
+      log --decorate: do not leak "commit" color into the next item
+      Git 2.3.4
+
+Karthik Nayak (1):
+      git: treat "git -C '<path>'" as a no-op when <path> is empty
+
+Kyle J. McKay (2):
+      imap-send: use cURL automatically when NO_OPENSSL defined
+      t7510: do not fail when gpg warns about insecure memory
+
+Michael J Gruber (1):
+      config,completion: add color.status.unmerged
+
+René Scharfe (2):
+      zlib: initialize git_zstream in git_deflate_init{,_gzip,_raw}
+      use isxdigit() for checking if a character is a hexadecimal digit
+
+SZEDER Gábor (2):
+      completion: add a test for __git_remotes() helper function
+      completion: simplify __git_remotes()
+
+Torsten Bögershausen (3):
+      connect.c: allow ssh://user@[2001:db8::1]/repo.git
+      t5601: add more test cases for IPV6
+      t5500: show user name and host in diag-url
+
+
+Version v2.3.3; changes since v2.3.2:
+-------------------------------------
+
+Anders Kaseorg (1):
+      t5516: correct misspelled pushInsteadOf
+
+Ben Walton (1):
+      kwset: use unsigned char to store values with high-bit set
+
+Jeff King (5):
+      git_connect: let user override virtual-host we send to daemon
+      t5570: test git-daemon's --interpolated-path option
+      daemon: sanitize incoming virtual hostname
+      diffcore-rename: split locate_rename_dst into two functions
+      diffcore-rename: avoid processing duplicate destinations
+
+Johannes Sixt (1):
+      test_ln_s_add: refresh stat info of fake symbolic links
+
+Junio C Hamano (11):
+      apply: reject input that touches outside the working area
+      apply: do not read from the filesystem under --index
+      apply: do not read from beyond a symbolic link
+      apply: do not touch a file beyond a symbolic link
+      t4008: correct stale comments
+      t9300: correct expected object names
+      t4010: correct expected object names
+      tests: do not borrow from COPYING and README from the real source
+      t/diff-lib: check exact object names in compare_diff_raw
+      t4008: modernise style
+      Git 2.3.3
+
+Michael J Gruber (1):
+      git-remote.txt: describe behavior without --tags and --no-tags
+
+Michal Sojka (1):
+      submodule: improve documentation of update subcommand
+
+Mikko Rapeli (1):
+      Documentation/git-clean.txt: document that -f may need to be given twice
+
+Mårten Kongstad (1):
+      diff --shortstat --dirstat: remove duplicate output
+
+Nguyễn Thái Ngọc Duy (1):
+      grep: correct help string for --exclude-standard
+
+René Scharfe (2):
+      daemon: look up client-supplied hostname lazily
+      daemon: use callback to build interpolated path
+
+
+Version v2.3.2; changes since v2.3.1:
+-------------------------------------
+
+Aleksander Boruch-Gruszecki (1):
+      merge-file: correctly open files when in a subdir
+
+Aleksey Vasenev (1):
+      wincred: fix get credential if username has "@"
+
+Alexander Kuleshov (1):
+      Git.pm: two minor typo fixes
+
+Eric Sunshine (1):
+      builtin/blame: destroy initialized commit_info only
+
+Jeff King (8):
+      t/lib-httpd: switch SANITY check for NOT_ROOT
+      t/lib-gpg: include separate public keys in keyring.gpg
+      t/lib-gpg: sanity-check that we can actually sign
+      config: do not ungetc EOF
+      decimal_width: avoid integer overflow
+      config_buf_ungetc: warn when pushing back a random character
+      for_each_loose_file_in_objdir: take an optional strbuf path
+      fast-import: avoid running end_packfile recursively
+
+Jonathon Mah (1):
+      sha1_file: fix iterating loose alternate objects
+
+Junio C Hamano (7):
+      tests: correct misuses of POSIXPERM
+      config.txt: clarify that add.ignore-errors is deprecated
+      config.txt: mark deprecated variables more prominently
+      Documentation/git-remote.txt: stress that set-url is not for triangular
+      CodingGuidelines: describe naming rules for configuration variables
+      Prepare for 2.3.2
+      Git 2.3.2
+
+Kirill A. Shutemov (1):
+      rebase -i: use full object name internally throughout the script
+
+Kyle J. McKay (3):
+      git-compat-util: do not step on MAC_OS_X_VERSION_MIN_REQUIRED
+      git-send-email.perl: support no- prefix with older GetOptions
+      Git::SVN::*: avoid premature FileHandle closure
+
+Matthieu Moy (2):
+      Documentation/config.txt: document mailinfo.scissors
+      Documentation/git-am.txt: mention mailinfo.scissors config variable
+
+Mike Hommey (2):
+      transport-helper: do not request symbolic refs to remote helpers
+      transport-helper: fix typo in error message when --signed is not supported
+
+Patrick Steinhardt (1):
+      git-submodule.sh: fix '/././' path normalization
+
+Ramsay Allan Jones (1):
+      git-compat-util.h: remove redundant code
+
+René Scharfe (4):
+      connect: use strcmp() for string comparison
+      for-each-ref: use skip_prefix() to avoid duplicate string comparison
+      pretty: use starts_with() to check for a prefix
+      sha1_name: use strlcpy() to copy strings
+
+Ryuichi Kokubo (1):
+      git-svn: fix localtime=true on non-glibc environments
+
+Stefan Beller (2):
+      hex.c: reduce memory footprint of sha1_to_hex static buffers
+      read-cache.c: free cache entry when refreshing fails
+
+Tom G. Christensen (2):
+      Makefile: handle broken curl version number in version check
+      ewah: fix building with gcc < 3.4.0
+
+Torsten Bögershausen (1):
+      test-lib.sh: set prerequisite SANITY by testing what we really need
+
+Дилян Палаузов (1):
+      do not include the same header twice
+
+
+Version v2.3.1; changes since v2.3.0:
+-------------------------------------
+
+Alexander Kuleshov (1):
+      add -i: return from list_and_choose if there is no candidate
+
+Doug Kelly (2):
+      t4255: test am submodule with diff.submodule
+      format-patch: ignore diff.submodule setting
+
+Jeff King (7):
+      git-compat-util: add xstrdup_or_null helper
+      builtin/apply.c: use xstrdup_or_null instead of null_strdup
+      builtin/commit.c: use xstrdup_or_null instead of envdup
+      use xstrdup_or_null to replace ternary conditionals
+      dumb-http: do not pass NULL path to parse_pack_index
+      read_and_strip_branch: fix typo'd address-of operator
+      do not check truth value of flex arrays
+
+Jonathan Nieder (1):
+      rerere: error out on autoupdate failure
+
+Junio C Hamano (6):
+      apply.c: typofix
+      apply: make update_pre_post_images() sanity check the given postlen
+      apply: count the size of postimage correctly
+      Documentation: what does "git log --indexed-objects" even mean?
+      diff-format doc: a score can follow M for rewrite
+      Git 2.3.1
+
+Lukas Fleischer (1):
+      blame.c: fix garbled error message
+
+Michael J Gruber (2):
+      commit: reword --author error message
+      git-push.txt: document the behavior of --repo
+
+brian m. carlson (1):
+      remote-curl: fall back to Basic auth if Negotiate fails
+
+
+Version v2.3.0; changes since v2.3.0-rc2:
+-----------------------------------------
+
+Alex Henrie (1):
+      l10n: ca.po: Fix trailing whitespace
+
+Junio C Hamano (1):
+      Git 2.3
+
+
+Version v2.3.0-rc2; changes since v2.3.0-rc1:
+---------------------------------------------
+
+Alex Henrie (1):
+      l10n: ca.po: update translation
+
+Alexander Kuleshov (1):
+      cat-file: use "type" and "size" from outer scope
+
+Benedikt Heine (1):
+      l10n: de.po: fix typo
+
+Jean-Noel Avila (2):
+      l10n: fr.po v2.3.0 round 1
+      l10n: fr.po v2.3.0 round 2
+
+Jiang Xin (5):
+      l10n: git.pot: v2.3.0 round 1 (13 new, 11 removed)
+      l10n: zh_CN: translations for git v2.3.0-rc0
+      l10n: git.pot: v2.3.0 round 2 (3 updated)
+      l10n: zh_CN: various fixes on command arguments
+      l10n: correct indentation of show-branch usage
+
+Joan Perals (1):
+      l10n: ca.po: various fixes
+
+Johannes Sixt (1):
+      t1050-large: generate large files without dd
+
+Junio C Hamano (1):
+      Git 2.3.0-rc2
+
+Kacper Kornet (1):
+      Fix unclosed here document in t3301.sh
+
+Michael J Gruber (2):
+      l10n: de.po: translate "leave behind" correctly
+      l10n: de.po: correct singular form
+
+Peter Krefting (2):
+      l10n: sv.po: Update Swedish translation (2298t0f0u)
+      l10n: sv.po: Update Swedish translation (2298t0f0u)
+
+Ralf Thielow (4):
+      l10n: de.po: translate "track" as "versionieren"
+      l10n: de.po: fix typo
+      l10n: de.po: translate 13 new messages
+      l10n: de.po: translate 3 messages
+
+Sven van Haastregt (1):
+      Documentation: fix version numbering
+
+Trần Ngọc Quân (2):
+      l10n: vi.po(2298t): Updated and change Plural-Forms
+      l10n: vi.po(2298t): Updated 3 new strings
+
+
+Version v2.3.0-rc1; changes since v2.3.0-rc0:
+---------------------------------------------
+
+Adam Williamson (1):
+      correct smtp-ssl-cert-path description
+
+Alexander Kuleshov (4):
+      show-branch: line-wrap show-branch usage
+      git.c: remove unnecessary #includes
+      cat-file: remove unused includes
+      Documentation: list long options for -v and -n
+
+Jeff King (4):
+      t1301: set umask in reflog sharedrepository=group test
+      update-server-info: create info/* with mode 0666
+      http-push: trim trailing newline from remote symref
+      parse_color: fix return value for numeric color values 0-8
+
+Jess Austin (1):
+      git-prompt.sh: allow to hide prompt for ignored pwd
+
+Johannes Schindelin (2):
+      git remote: allow adding remotes agreeing with url.<...>.insteadOf
+      Add a regression test for 'git remote add <existing> <same-url>'
+
+Junio C Hamano (2):
+      Fifth batch for 2.3 cycle
+      Git 2.3.0-rc1
+
+Kyle J. McKay (3):
+      log.c: fix translation markings
+      imap-send.c: support GIT_CURL_VERBOSE
+      imap-send.c: set CURLOPT_USE_SSL to CURLUSESSL_TRY
+
+Matthieu Moy (1):
+      git-completion: add --autostash for 'git rebase'
+
+Philip Oakley (2):
+      doc: core.ignoreStat clarify the --assume-unchanged effect
+      doc: core.ignoreStat update, and clarify the --assume-unchanged effect
+
+Ralf Thielow (1):
+      show-branch: fix indentation of usage string
+
+Ramkumar Ramachandra (2):
+      Git::SVN: handle missing ref_id case correctly
+      git-svn: make it play nicely with submodules
+
+Raphael Kubo da Costa (1):
+      for-each-ref: always check stat_tracking_info()'s return value
+
+Reuben Hawkins (3):
+      configure.ac: check 'tv_nsec' field in 'struct stat'
+      configure.ac: check for clock_gettime and CLOCK_MONOTONIC
+      configure.ac: check for HMAC_CTX_cleanup
+
+Richard Hansen (3):
+      git-prompt.sh: if pc mode, immediately set PS1 to a plain prompt
+      test-lib: use 'test ...' instead of '[ ... ]'
+      test-lib.sh: do tests for color support after changing HOME
+
+Steffen Prohaska (1):
+      subtree: fix AsciiDoc list item continuation
+
+Tony Finch (1):
+      git-prompt: preserve value of $? in all cases
+
+
+Version v2.3.0-rc0; changes since v2.2.2:
+-----------------------------------------
+
+Alfred Perlstein (1):
+      git-svn: support for git-svn propset
+
+Beat Bolli (5):
+      update_unicode.sh: simplify output capture
+      update_unicode.sh: set UNICODE_DIR only once
+      update_unicode.sh: shorten uniset invocation path
+      update_unicode.sh: make the output structure visible
+      update_unicode.sh: delete the command group
+
+Ben Walton (1):
+      t0090: tweak awk statement for Solaris /usr/xpg4/bin/awk
+
+Bernhard Reiter (2):
+      imap-send: use parse options API to determine verbosity
+      git-imap-send: use libcurl for implementation
+
+Christian Couder (5):
+      commit: make ignore_non_trailer() non static
+      trailer: reuse ignore_non_trailer() to ignore conflict lines
+      trailer: add test with an old style conflict block
+      bisect: parse revs before passing them to check_expected_revs()
+      bisect: add test to check that revs are properly parsed
+
+Christian Hesse (4):
+      tests: create gpg homedir on the fly
+      tests: skip RFC1991 tests for gnupg 2.1
+      tests: replace binary GPG keyrings with ASCII-armored keys
+      tests: make comment on GPG keyring match the code
+
+Dan Wyand (1):
+      git-sh-setup.sh: use dashdash with basename call
+
+David Aguilar (4):
+      mergetool--lib: remove use of $status global
+      difftool--helper: add explicit exit statement
+      mergetool: simplify conditionals
+      mergetools: stop setting $status in merge_cmd()
+
+David Michael (1):
+      compat: convert modes to use portable file type values
+
+Eric Sunshine (7):
+      git-compat-util: suppress unavoidable Apple-specific deprecation warnings
+      t2004: modernize style
+      t2004: drop unnecessary write-tree/read-tree
+      t2004: standardize file naming in symlink test
+      t2004: demonstrate broken relative path printing
+      checkout-index: fix --temp relative path mangling
+      SubmittingPatches: explain rationale for using --notes with format-patch
+
+Jeff King (13):
+      parse_color: refactor color storage
+      parse_color: support 24-bit RGB values
+      parse_color: recognize "no$foo" to clear the $foo attribute
+      diff-highlight: allow configurable colors
+      credential: let helpers tell us to quit
+      prompt: respect GIT_TERMINAL_PROMPT to disable terminal prompts
+      fsck: properly bound "invalid tag name" error message
+      parse_color: drop COLOR_BACKGROUND macro
+      pkt-line: allow writing of LARGE_PACKET_MAX buffers
+      t: support clang/gcc AddressSanitizer
+      commit: loosen ident checks when generating template
+      commit: always populate GIT_AUTHOR_* variables
+      add--interactive: leave main loop on read error
+
+Jim Hill (1):
+      pre-push.sample: remove unnecessary and misleading IFS=' '
+
+Johan Herland (9):
+      builtin/notes: fix premature failure when trying to add the empty blob
+      t3301: verify that 'git notes' removes empty notes by default
+      builtin/notes: improve naming
+      builtin/notes: refactor note file path into struct note_data
+      builtin/notes: simplify early exit code in add()
+      builtin/notes: split create_note() to clarify add vs. remove logic
+      builtin/notes: add --allow-empty, to allow storing empty notes
+      notes: empty notes should be shown by 'git log'
+      t3301: modernize style
+
+Johannes Schindelin (2):
+      receive-pack: add another option for receive.denyCurrentBranch
+      test-hashmap: squelch gcc compiler warning
+
+Johannes Sixt (1):
+      t5000 on Windows: do not mistake "sh.exe" as "sh"
+
+Junio C Hamano (30):
+      checkout: report upstream correctly even with loosely defined branch.*.merge
+      clone: --dissociate option to mark that reference is only temporary
+      diff -B -M: fix output for "copy and then rewrite" case
+      builtin/merge.c: drop a parameter that is never used
+      merge & sequencer: unify codepaths that write "Conflicts:" hint
+      strbuf_add_commented_lines(): avoid SP-HT sequence in commented lines
+      builtin/commit.c: extract ignore_non_trailer() helper function
+      merge & sequencer: turn "Conflicts:" hint into a comment
+      bisect: clean flags after checking merge bases
+      get_merge_bases(): always clean-up object flags
+      unpack_trees: plug leakage of o->result
+      mergetool--lib: remove no-op assignment to $status from setup_user_tool
+      SubmittingPatches: refer to t/README for tests
+      t/README: justify why "! grep foo" is sufficient
+      t9001: style modernisation phase #1
+      t9001: style modernisation phase #2
+      t9001: style modernisation phase #3
+      t9001: style modernisation phase #4
+      t9001: style modernisation phase #5
+      system_path(): always return free'able memory to the caller
+      t5516: more tests for receive.denyCurrentBranch=updateInstead
+      run-command.c: retire unused run_hook_with_custom_index()
+      t3102: document that ls-tree does not yet support negated pathspec
+      t3102: style modernization
+      First batch for 2.3 cycle
+      tests: squelch noise from GPG machinery set-up
+      Second batch for 2.3 cycle
+      Third batch for 2.3 cycle
+      Fourth batch for 2.3 cycle
+      Git 2.3.0-rc0
+
+Justin Guenther (1):
+      git-prompt.sh: make $f local to __git_eread()
+
+Karsten Blees (1):
+      pack-bitmap: do not use gcc packed attribute
+
+Luis Henriques (2):
+      send-email: add --[no-]xmailer option
+      test/send-email: --[no-]xmailer tests
+
+Michael Haggerty (10):
+      cmd_config(): make a copy of path obtained from git_path()
+      prune_remote(): exit early if there are no stale references
+      prune_remote(): initialize both delete_refs lists in a single loop
+      prune_remote(): sort delete_refs_list references en masse
+      repack_without_refs(): make the refnames argument a string_list
+      prune_remote(): rename local variable
+      prune_remote(): iterate using for_each_string_list_item()
+      sort_string_list(): rename to string_list_sort()
+      t1400: add some more tests of "update-ref --stdin"'s verify command
+      update-ref: fix "verify" command with missing <oldvalue>
+
+Michael J Gruber (4):
+      t3200-branch: test -M
+      check-ignore: clarify treatment of tracked files
+      gitignore.txt: do not suggest assume-unchanged
+      branch: allow -f with -m and -d
+
+Nguyễn Thái Ngọc Duy (6):
+      lockfile.c: store absolute path
+      tree.c: update read_tree_recursive callback to pass strbuf as base
+      ls-tree: remove path filtering logic in show_tree
+      ls-tree: disable negative pathspec because it's not supported
+      index-pack: terminate object buffers with NUL
+      index-format.txt: add a missing closing quote
+
+Onno Kortmann (1):
+      Show number of TODO items for interactive rebase
+
+Paolo Bonzini (4):
+      git-send-email: delay creation of MIME headers
+      git-send-email: add --transfer-encoding option
+      git-mailinfo: add --message-id
+      git-am: add --message-id/--no-message-id
+
+Paul Smith (1):
+      git-new-workdir: don't fail if the target directory is empty
+
+Peter van der Does (1):
+      Update documentation occurrences of filename .sh
+
+Philip Oakley (1):
+      doc: make clear --assume-unchanged's user contract
+
+Ralf Thielow (3):
+      builtin/push.c: fix description of --recurse-submodules option
+      for-each-ref: correct spelling of Tcl in option description
+      completion: add git-tag options
+
+Ramsay Allan Jones (2):
+      git-compat-util.h: don't define _XOPEN_SOURCE on cygwin
+      t0050-*.sh: mark the rename (case change) test as passing
+
+René Scharfe (6):
+      use args member of struct child_process
+      use strbuf_complete_line() for adding a newline if needed
+      commit-tree: simplify parsing of option -S using skip_prefix()
+      merge: release strbuf after use in suggest_conflicts()
+      transport: simplify duplicating a substring in transport_get() using xmemdupz()
+      refs: plug strbuf leak in lock_ref_sha1_basic()
+
+Ronnie Sahlberg (1):
+      lock_ref_sha1_basic: do not die on locking errors
+
+Slavomir Vlcek (3):
+      builtin: move builtin retrieval to get_builtin()
+      apply: fix typo in an error message
+      Documentation/git-stripspace: add synopsis for --comment-lines
+
+Stefan Beller (5):
+      string_list: document string_list_(insert,lookup)
+      mailmap: use higher level string list functions
+      string_list: remove string_list_insert_at_index() from its API
+      t5400: remove dead code
+      Documentation/SubmittingPatches: unify whitespace/tabs for the DCO
+
+Thomas Quinot (1):
+      git_connect: set ssh shell command in GIT_SSH_COMMAND
+
+Tony Finch (1):
+      git-prompt: preserve value of $? inside shell prompt
+
+Torsten Bögershausen (2):
+      init-db: improve the filemode trustability check
+      t0027: check the eol conversion warnings
+
+brian m. carlson (3):
+      Documentation: add missing article in rev-list-options.txt
+      rev-list: add an option to mark fewer edges as uninteresting
+      pack-objects: use --objects-edge-aggressive for shallow repos
+
+Роман Донченко (2):
+      send-email: align RFC 2047 decoding more closely with the spec
+      send-email: handle adjacent RFC 2047-encoded words properly
+
+
+Version v2.2.2; changes since v2.2.1:
+-------------------------------------
+
+Alexander Kuleshov (1):
+      clean: typofix
+
+Jeff King (17):
+      pass TIME_DATE_NOW to approxidate future-check
+      checkout $tree: do not throw away unchanged index entries
+      approxidate: allow ISO-like dates far in the future
+      Makefile: have perl scripts depend on NO_PERL setting
+      t0090: mark add-interactive test with PERL prerequisite
+      t960[34]: mark cvsimport tests as requiring perl
+      gitweb: hack around CGI's list-context param() handling
+      docs: describe ANSI 256-color mode
+      config: fix parsing of "git config --get-color some.key -1"
+      t4026: test "normal" color
+      push: truly use "simple" as default, not "upstream"
+      for_each_reflog_ent_reverse: fix newlines on block boundaries
+      for_each_reflog_ent_reverse: turn leftover check into assertion
+      read_packed_refs: use a strbuf for reading lines
+      read_packed_refs: pass strbuf to parse_ref_line
+      read_packed_refs: use skip_prefix instead of static array
+      is_hfs_dotgit: loosen over-eager match of \u{..47}
+
+Johannes Sixt (1):
+      Windows: correct detection of EISDIR in mingw_open()
+
+Jonathan Nieder (2):
+      Makefile: simplify by using SCRIPT_{PERL,SH}_GEN macros
+      Makefile: have python scripts depend on NO_PYTHON setting
+
+Junio C Hamano (2):
+      Prepare for 2.2.2
+      Git 2.2.2
+
+Michael Haggerty (1):
+      create_default_files(): don't set u+x bit on $GIT_DIR/config
+
+Michael J Gruber (1):
+      add: ignore only ignored files
+
+Mike Hommey (1):
+      sha1_name: avoid unnecessary sha1 lookup in find_unique_abbrev
+
+René Scharfe (2):
+      use labs() for variables of type long instead of abs()
+      use labs() for variables of type long instead of abs()
+
+Ronald Wampler (1):
+      git-am.txt: --ignore-date flag is not passed to git-apply
+
+brian m. carlson (1):
+      Documentation: change "gitlink" typo in git-push
+
+
+Version v2.2.1; changes since v2.2.0:
+-------------------------------------
+
+Hartmut Henkel (1):
+      l10n: de.po: fix typos
+
+Jeff King (8):
+      unpack-trees: propagate errors adding entries to the index
+      read-tree: add tests for confusing paths like ".." and ".git"
+      verify_dotfile(): reject .git case-insensitively
+      t1450: refactor ".", "..", and ".git" fsck tests
+      fsck: notice .git case-insensitively
+      utf8: add is_hfs_dotgit() helper
+      read-cache: optionally disallow HFS+ .git variants
+      fsck: complain about HFS+ ".git" aliases in trees
+
+Johannes Schindelin (3):
+      path: add is_ntfs_dotgit() helper
+      read-cache: optionally disallow NTFS .git variants
+      fsck: complain about NTFS ".git" aliases in trees
+
+Junio C Hamano (6):
+      Start post 2.2 cycle
+      Git 1.8.5.6
+      Git 1.9.5
+      Git 2.0.5
+      Git 2.1.4
+      Git 2.2.1
+
+
+Version v2.2.0; changes since v2.2.0-rc3:
+-----------------------------------------
+
+Junio C Hamano (1):
+      Git 2.2
+
+Marc Branchaud (1):
+      RelNotes: spelling & grammar tweaks
+
+
+Version v2.2.0-rc3; changes since v2.2.0-rc2:
+---------------------------------------------
+
+Alex Henrie (1):
+      l10n: Update Catalan translation
+
+Christian Couder (2):
+      trailer: ignore comment lines inside the trailers
+      trailer: display a trailer without its trailing newline
+
+David Aguilar (1):
+      difftool: honor --trust-exit-code for builtin tools
+
+Jiang Xin (3):
+      l10n: git.pot: v2.2.0 round 2 (1 updated)
+      l10n: batch updates for one trivial change
+      l10n: remove a superfluous translation for push.c
+
+Junio C Hamano (2):
+      Documentation/git-commit: clarify that --only/--include records the working tree contents
+      Git 2.2.0-rc3
+
+Max Horn (1):
+      doc: add some crossrefs between manual pages
+
+Ralf Thielow (4):
+      l10n: de.po: use imperative form for command options
+      l10n: de.po: translate 62 new messages
+      l10n: de.po: translate 2 new messages
+      l10n: de.po: translate 2 messages
+
+Slavomir Vlcek (1):
+      SubmittingPatches: final submission is To: maintainer and CC: list
+
+Stefan Beller (1):
+      l10n: de.po: Fixup one translation
+
+Stefan Naewe (1):
+      gittutorial: fix output of 'git status'
+
+Thomas Ackermann (1):
+      gittutorial.txt: remove reference to ancient Git version
+
+Torsten Bögershausen (1):
+      t5705: the file:// URL should be absolute
+
+
+Version v2.2.0-rc2; changes since v2.2.0-rc1:
+---------------------------------------------
+
+Alexander Shopov (1):
+      l10n: Updated Bulgarian translation of git (2296t,0f,0u)
+
+Jean-Noel Avila (1):
+      l10n: fr.po (2296t) update for version 2.2.0
+
+Jeff King (1):
+      t1410: fix breakage on case-insensitive filesystems
+
+Jiang Xin (2):
+      l10n: git.pot: v2.2.0 round 1 (62 new, 23 removed)
+      l10n: zh_CN: translations for git v2.2.0-rc0
+
+John Szakmeister (1):
+      diff-highlight: exit when a pipe is broken
+
+Junio C Hamano (2):
+      Update draft release notes to 2.2
+      Git 2.2.0-rc2
+
+Nicolas Dermine (1):
+      config.txt: fix typo
+
+Peter Krefting (1):
+      l10n: sv.po: Update Swedish translation (2296t0f0u)
+
+René Scharfe (2):
+      trailer: use CHILD_PROCESS_INIT in apply_command()
+      run-command: use void to declare that functions take no parameters
+
+Thomas Quinot (1):
+      Documentation/config.txt: fix minor typo
+
+Trần Ngọc Quân (1):
+      l10n: vi.po: Update new message strings
+
+
+Version v2.2.0-rc1; changes since v2.2.0-rc0:
+---------------------------------------------
+
+Ben North (1):
+      gitignore.txt: fix spelling of "backslash"
+
+Jeff King (5):
+      cache-tree: avoid infinite loop on zero-entry tree
+      bundle: split out ref writing from bundle_create
+      fetch: load all default config at startup
+      ignore stale directories when checking reflog existence
+      docs/credential-store: s/--store/--file/
+
+Junio C Hamano (3):
+      bundle: split out a helper function to create pack data
+      bundle: split out a helper function to compute and write prerequisites
+      Git 2.2.0-rc1
+
+Matthieu Moy (1):
+      RelNotes/2.2.0.txt: fix minor typos
+
+René Scharfe (1):
+      use child_process_init() to initialize struct child_process variables
+
+Thomas Ackermann (1):
+      Documentation: typofixes
+
+Tzvetan Mikov (1):
+      line-log: fix crash when --first-parent is used
+
+
+Version v2.2.0-rc0; changes since v2.1.4:
+-----------------------------------------
+
+Alex Henrie (1):
+      grammofix in user-facing messages
+
+Arjun Sreedharan (1):
+      calloc() and xcalloc() takes nmemb and then size
+
+Beat Bolli (1):
+      pretty: provide a strict ISO 8601 date format
+
+Ben Walton (2):
+      t/lib-credential: use write_script
+      trace.c: do not mark getnanotime() as "inline"
+
+Bernhard Reiter (3):
+      http.c: die if curl_*_init fails
+      git-imap-send: simplify tunnel construction
+      imap-send.c: imap_folder -> imap_server_conf.folder
+
+Brian Gernhardt (1):
+      receive-pack::hmac_sha1(): copy the entire SHA-1 hash out
+
+Brice Lambson (1):
+      MinGW: update tests to handle a native eol of crlf
+
+Charles Bailey (2):
+      mergetool: don't require a work tree for --tool-help
+      difftool: don't assume that default sh is sane
+
+Christian Couder (11):
+      trailer: add data structures and basic functions
+      trailer: process trailers from input message and arguments
+      trailer: read and process config information
+      trailer: process command line trailer arguments
+      trailer: parse trailers from file or stdin
+      trailer: put all the processing together and print
+      trailer: add interpret-trailers command
+      trailer: add tests for "git interpret-trailers"
+      trailer: execute command from 'trailer.<name>.command'
+      trailer: add tests for commands in config file
+      Documentation: add documentation for 'git interpret-trailers'
+
+David Aguilar (19):
+      stylefix: asterisks stick to the variable, not the type
+      cleanups: ensure that git-compat-util.h is included first
+      Documentation: a note about stdout for git rev-parse --verify --quiet
+      t1503: use test_must_be_empty
+      refs: make rev-parse --quiet actually quiet
+      stash: prefer --quiet over shell redirection of the standard error stream
+      completion: add --show-signature for log and show
+      t7610-mergetool: use tabs instead of a mix of tabs and spaces
+      t7610-mergetool: add missing && and remove commented-out code
+      t7610-mergetool: prefer test_config over git config
+      test-lib-functions: adjust style to match CodingGuidelines
+      mergetool: use more conservative temporary filenames
+      git-sh-setup: move GIT_DIR initialization into a function
+      t7610-mergetool: use test_config to isolate tests
+      test-lib-functions: adjust style to match CodingGuidelines
+      mergetool: use more conservative temporary filenames
+      mergetool: add an option for writing to a temporary directory
+      t7610-mergetool: add test cases for mergetool.writeToTemp
+      difftool: add support for --trust-exit-code
+
+David Michael (3):
+      git-compat-util.h: support variadic macros with the XL C compiler
+      Makefile: reorder linker flags in the git executable rule
+      compat/bswap.h: detect endianness from XL C compiler macros
+
+David Turner (4):
+      cache-tree: create/update cache-tree on checkout
+      test-dump-cache-tree: invalid trees are not errors
+      cache-tree: subdirectory tests
+      cache-tree: Write updated cache-tree after commit
+
+Eric Wong (15):
+      git svn: info: correctly handle absolute path args
+      git svn: find-rev allows short switches for near matches
+      git-svn: delay term initialization
+      git-svn: reduce check_cherry_pick cache overhead
+      git-svn: cache only mergeinfo revisions
+      git-svn: remove mergeinfo rev caching
+      git-svn: reload RA every log-window-size
+      git-svn: remove unnecessary DESTROY override
+      git-svn: save a little memory as fetch progresses
+      git-svn: disable _rev_list memoization
+      Git.pm: add specified name to tempfile template
+      git-svn: prepare SVN::Ra config pieces once
+      git-svn: (cleanup) remove editor param passing
+      git-svn: add space after "W:" prefix in warning
+      git-svn: use SVN::Ra::get_dir2 when possible
+
+Etienne Buira (2):
+      index-pack: fix compilation with NO_PTHREADS
+      Handle atexit list internaly for unthreaded builds
+
+Harry Jeffery (1):
+      pretty: add %D format specifier
+
+Ian Liu Rodrigues (1):
+      Makefile: fix some typos in the preamble
+
+Jaime Soriano Pastor (2):
+      read_index_from(): catch out of order entries when reading an index file
+      read_index_unmerged(): remove unnecessary loop index adjustment
+
+Jakob Stoklund Olesen (2):
+      git-svn: only look at the new parts of svn:mergeinfo
+      git-svn: only look at the root path for svn:mergeinfo
+
+Jeff King (54):
+      stash: default listing to working-tree diff
+      subtree: make "all" default target of Makefile
+      http: style fixes for curl_multi_init error check
+      Makefile: use `find` to determine static header dependencies
+      log-tree: make add_name_decoration a public function
+      log-tree: make name_decoration hash static
+      Makefile: drop CHECK_HEADER_DEPENDENCIES code
+      log-tree: use FLEX_ARRAY in name_decoration
+      commit: provide a function to find a header in a buffer
+      record_author_date(): fix memory leak on malformed commit
+      record_author_date(): use find_commit_header()
+      date: use strbufs in date-formatting functions
+      teach fast-export an --anonymize option
+      docs/fast-export: explain --anonymize more completely
+      determine_author_info(): reuse parsing functions
+      determine_author_info(): copy getenv output
+      refs: write packed_refs file using stdio
+      refs: speed up is_refname_available
+      prune-packed: fix minor memory leak
+      make update-server-info more robust
+      server-info: clean up after writing info/packs
+      credential-cache: close stderr in daemon process
+      branch: clean up commit flags after merge-filter walk
+      t5304: use test_path_is_* instead of "test -f"
+      t5304: use helper to report failure of "test foo = bar"
+      test-lib.sh: support -x option for shell-tracing
+      color_parse: do not mention variable name in error message
+      foreach_alt_odb: propagate return value from callback
+      isxdigit: cast input to unsigned char
+      object_array: factor out slopbuf-freeing logic
+      object_array: add a "clear" function
+      clean up name allocation in prepare_revision_walk
+      reachable: use traverse_commit_list instead of custom walk
+      reachable: reuse revision.c "add all reflogs" code
+      prune: factor out loose-object directory traversal
+      reachable: mark index blobs as SEEN
+      prune-packed: use for_each_loose_file_in_objdir
+      count-objects: do not use xsize_t when counting object size
+      count-objects: use for_each_loose_file_in_objdir
+      sha1_file: add for_each iterators for loose and packed objects
+      prune: keep objects reachable from recent objects
+      pack-objects: refactor unpack-unreachable expiration check
+      pack-objects: match prune logic for discarding objects
+      write_sha1_file: freshen existing objects
+      make add_object_array_with_context interface more sane
+      traverse_commit_list: support pending blobs/trees with paths
+      t5516: test pushing a tag of an otherwise unreferenced blob
+      rev-list: document --reflog option
+      rev-list: add --indexed-objects option
+      reachable: use revision machinery's --indexed-objects code
+      pack-objects: use argv_array
+      repack: pack objects mentioned by the index
+      pack-objects: double-check options before discarding objects
+      drop add_object_array_with_mode
+
+Johannes Schindelin (6):
+      Refactor type_from_string() to allow continuing after detecting an error
+      fsck_object(): allow passing object data separately from the object itself
+      Make sure fsck_commit_buffer() does not run out of the buffer
+      fsck: check tag objects' headers
+      Add regression tests for stricter tag fsck'ing
+      Make sure that index-pack --strict checks tag objects
+
+Johannes Sixt (3):
+      t9300: use test_cmp_bin instead of test_cmp to compare binary files
+      mingw.h: add dummy functions for sigset_t operations
+      difftool--helper: exit when reading a prompt answer fails
+
+John Szakmeister (1):
+      completion: silence "fatal: Not a git repository" error
+
+Jonas 'Sortie' Termansen (3):
+      git-compat-util.h: add missing semicolon after struct itimerval
+      autoconf: check for struct itimerval
+      autoconf: check for setitimer()
+
+Jonathan Nieder (10):
+      i18n: treat "make pot" as an explicitly-invoked target
+      update-ref --stdin: narrow scope of err strbuf
+      update-ref --stdin: pass transaction around explicitly
+      pass config slots as pointers instead of offsets
+      mv test: recreate mod/ directory instead of relying on stale copy
+      branch -d: avoid repeated symref resolution
+      packed-ref cache: forbid dot-components in refnames
+      refs.c: do not permit err == NULL
+      lockfile: remove unable_to_lock_error
+      ref_transaction_commit: bail out on failure to remove a ref
+
+Junio C Hamano (55):
+      tests: drop GIT_*_TIMING_TESTS environment variable support
+      lockfile: allow reopening a closed but still locked file
+      test prerequisites: eradicate NOT_FOO
+      test prerequisites: enumerate with commas
+      config.mak.uname: add hint on uname_R for MacOS X
+      Start the post-2.1 cycle
+      cache-tree: do not try to use an invalidated subtree info to build a tree
+      parse-options: detect attempt to add a duplicate short option name
+      Update draft release notes to 2.2
+      Update draft release notes to 2.2
+      hash-object: reduce file-scope statics
+      hash-object: pass 'write_object' as a flag
+      hash-object: add --literally option
+      t1450: make sure fsck detects a malformed tagger line
+      receive-pack: do not overallocate command structure
+      receive-pack: parse feature request a bit earlier
+      receive-pack: do not reuse old_sha1[] for other things
+      receive-pack: factor out queueing of command
+      send-pack: move REF_STATUS_REJECT_NODELETE logic a bit higher
+      send-pack: refactor decision to send update per ref
+      send-pack: always send capabilities
+      send-pack: factor out capability string generation
+      receive-pack: factor out capability string generation
+      send-pack: rename "new_refs" to "need_pack_data"
+      send-pack: refactor inspecting and resetting status and sending commands
+      send-pack: clarify that cmds_sent is a boolean
+      gpg-interface: move parse_gpg_output() to where it should be
+      gpg-interface: move parse_signature() to where it should be
+      pack-protocol doc: typofix for PKT-LINE
+      push: the beginning of "git push --signed"
+      receive-pack: GPG-validate push certificates
+      send-pack: send feature request on push-cert packet
+      signed push: remove duplicated protocol info
+      signed push: add "pushee" header to push certificate
+      receive-pack: allow hooks to ignore its standard input stream
+      signed push: fortify against replay attacks
+      signed push: teach smart-HTTP to pass "git push --signed" around
+      signed push: allow stale nonce in stateless mode
+      Update draft release notes to 2.2
+      t7004: give the test a bit more stack space
+      Update draft release notes to 2.2
+      Update draft release notes to 2.2
+      Update draft release notes to 2.2
+      completion: use "git -C $there" instead of (cd $there && git ...)
+      pack-objects: set number of threads before checking and warning
+      t1308: fix broken here document in test script
+      Update draft release notes to 2.2
+      reflog test: test interaction with detached HEAD
+      Revert "archive: honor tar.umask even for pax headers"
+      Update draft release notes to 2.2
+      mergetool: rename bc3 to bc
+      Update draft release notes to 2.2
+      Update draft release notes to 2.2
+      Update draft release notes to 2.2
+      Git 2.2.0-rc0
+
+Kyle J. McKay (1):
+      config.mak.uname: set NO_APPLE_COMMON_CRYPTO on older systems
+
+Lawrence Velázquez (1):
+      git-svn.txt: Remove mentions of repack options
+
+Linus Arver (7):
+      Documentation: git-init: typographical fixes
+      Documentation: git-init: list items facelift
+      Documentation: git-init: template directory: reword
+      Documentation: git-init: --separate-git-dir: clarify
+      Documentation: git-init: reword parenthetical statements
+      Documentation: git-init: template directory: reword and cross-reference
+      Documentation: git-init: flesh out example
+
+Matthias Ruester (2):
+      rerere.h: mark string for translation
+      builtin/log.c: mark strings for translation
+
+Matthieu Moy (7):
+      config --global --edit: create a template file if needed
+      home_config_paths(): let the caller ignore xdg path
+      commit: advertise config --global --edit on guessed identity
+      config.c: mark error and warnings strings for translation
+      config.c: fix accuracy of line number in errors
+      builtin/log.c: fix minor memory leak
+      merge, pull: stop advising 'commit -a' in case of conflict
+
+Max Kirillov (2):
+      gitk: Show detached HEAD if --all is specified
+      gitk: Remove boilerplate for configuration variables
+
+Maxim Bublis (1):
+      contrib/svn-fe: fix Makefile
+
+Michael Haggerty (41):
+      unable_to_lock_die(): rename function from unable_to_lock_index_die()
+      api-lockfile: revise and expand the documentation
+      close_lock_file(): exit (successfully) if file is already closed
+      rollback_lock_file(): do not clear filename redundantly
+      rollback_lock_file(): exit early if lock is not active
+      rollback_lock_file(): set fd to -1
+      lockfile: unlock file if lockfile permissions cannot be adjusted
+      hold_lock_file_for_append(): release lock on errors
+      lock_file(): always initialize and register lock_file object
+      lockfile.c: document the various states of lock_file objects
+      cache.h: define constants LOCK_SUFFIX and LOCK_SUFFIX_LEN
+      delete_ref_loose(): don't muck around in the lock_file's filename
+      prepare_index(): declare return value to be (const char *)
+      lock_file(): exit early if lockfile cannot be opened
+      remove_lock_file(): call rollback_lock_file()
+      commit_lock_file(): inline temporary variable
+      commit_lock_file(): die() if called for unlocked lockfile object
+      close_lock_file(): if close fails, roll back
+      commit_lock_file(): rollback lock file on failure to rename
+      api-lockfile: document edge cases
+      dump_marks(): remove a redundant call to rollback_lock_file()
+      git_config_set_multivar_in_file(): avoid call to rollback_lock_file()
+      lockfile: avoid transitory invalid states
+      struct lock_file: declare some fields volatile
+      try_merge_strategy(): remove redundant lock_file allocation
+      try_merge_strategy(): use a statically-allocated lock_file object
+      commit_lock_file(): use a strbuf to manage temporary space
+      lockfile: change lock_file::filename into a strbuf
+      resolve_symlink(): use a strbuf for internal scratch space
+      resolve_symlink(): take a strbuf parameter
+      trim_last_path_component(): replace last_path_elm()
+      commit_lock_file_to(): refactor a helper out of commit_lock_file()
+      lockfile: rename LOCK_NODEREF to LOCK_NO_DEREF
+      lockfile.c: rename static functions
+      get_locked_file_path(): new function
+      hold_lock_file_for_append(): restore errno before returning
+      hold_locked_index(): move from lockfile.c to read-cache.c
+      lockfile.h: extract new header file for the functions in lockfile.c
+      fdopen_lock_file(): access a lockfile using stdio
+      dump_marks(): reimplement using fdopen_lock_file()
+      commit_packed_refs(): reimplement using fdopen_lock_file()
+
+Michael J Gruber (2):
+      push: heed user.signingkey for signed pushes
+      t/lib-gpg: make gpghome files writable
+
+Monard Vong (1):
+      git-svn: branch: avoid systematic prompt for cert/pass
+
+Nguyễn Thái Ngọc Duy (16):
+      mv: mark strings for translations
+      mv: flatten error handling code block
+      utf8.c: fix strbuf_utf8_replace() consuming data beyond input string
+      wrapper.c: introduce gentle xmallocz that does not die()
+      sha1_file.c: do not die failing to malloc in unpack_compressed_entry
+      diff.c: allow to pass more flags to diff_populate_filespec
+      diff --stat: mark any file larger than core.bigfilethreshold binary
+      diff: shortcut for diff'ing two binary SHA-1 objects
+      mv: split submodule move preparation code out
+      mv: remove an "if" that's always true
+      mv: move index search code out
+      mv: unindent one level for directory move code
+      mv: combine two if(s)
+      mv: no SP between function name and the first opening parenthese
+      archive: support filtering paths with glob
+      dir.c: remove the second declaration of "stk" in prep_exclude()
+
+Pat Thoyts (1):
+      Makefile: propagate NATIVE_CRLF to C
+
+Patrick Reynolds (2):
+      use a hashmap to make remotes faster
+      unblock and unignore SIGPIPE
+
+Philip Oakley (4):
+      doc: modernise everyday.txt wording and format in man page style
+      doc: Makefile regularise OBSOLETE_HTML list building
+      doc: add 'everyday' to 'git help'
+      doc: fix 'git status --help' character quoting
+
+Ramsay Allan Jones (1):
+      revision: remove definition of unused 'add_object' function
+
+René Scharfe (44):
+      strbuf: add strbuf_getcwd()
+      unix-sockets: use strbuf_getcwd()
+      init: avoid superfluous real_path() calls
+      turn path macros into inline function
+      run-command: introduce CHILD_PROCESS_INIT
+      run-command: introduce child_process_init()
+      run-command: call run_command_v_opt_cd_env() instead of duplicating it
+      run-command: inline prepare_run_command_v_opt()
+      sha1_name: avoid quadratic list insertion in handle_one_ref
+      walker: avoid quadratic list insertion in mark_complete
+      setup: convert setup_git_directory_gently_1 et al. to strbuf
+      abspath: use strbuf_getcwd() to remember original working directory
+      abspath: convert real_path_internal() to strbuf
+      wrapper: add xgetcwd()
+      use xgetcwd() to get the current directory or die
+      use xgetcwd() to set $GIT_DIR
+      abspath: convert absolute_path() to strbuf
+      use strbuf_add_absolute_path() to add absolute paths
+      connect: simplify check_ref() using skip_prefix() and starts_with()
+      pack-write: simplify index_pack_lockfile using skip_prefix() and xstrfmt()
+      config: simplify git_config_include()
+      http-walker: simplify process_alternates_response() using strbuf
+      merge-tree: remove unused df_conflict arguments
+      imap-send: simplify v_issue_imap_cmd() and get_cmd_result() using starts_with()
+      trace: correct trace_strbuf() parameter type for !HAVE_VARIADIC_MACROS
+      strbuf: export strbuf_addchars()
+      strbuf: use strbuf_addchars() for adding a char multiple times
+      repack: call prune_packed_objects() and update_server_info() directly
+      add macro REALLOC_ARRAY
+      use REALLOC_ARRAY for changing the allocation size of arrays
+      graph: simplify graph_padding_line()
+      remote: simplify match_name_with_pattern() using strbuf
+      t0090: avoid passing empty string to printf %d
+      sha1-array: add test-sha1-array and basic tests
+      sha1-lookup: handle duplicates in sha1_pos()
+      bundle: plug minor memory leak in is_tag_in_date_range()
+      mailsplit: remove unnecessary unlink(2) call
+      use skip_prefix() to avoid more magic numbers
+      receive-pack: plug minor memory leak in unpack()
+      run-command: add env_array, an optional argv_array for env
+      use env_array member of struct child_process
+      grep: add color.grep.matchcontext and color.grep.matchselected
+      receive-pack: avoid minor leak in case start_async() fails
+      api-run-command: add missing list item marker
+
+Robert de Bath (1):
+      config.txt: pack.windowmemory limit applies per-thread
+
+Ronnie Sahlberg (38):
+      refs.c: change ref_transaction_create to do error checking and return status
+      refs.c: update ref_transaction_delete to check for error and return status
+      refs.c: make ref_transaction_begin take an err argument
+      refs.c: add transaction.status and track OPEN/CLOSED
+      tag.c: use ref transactions when doing updates
+      replace.c: use the ref transaction functions for updates
+      commit.c: use ref transactions for updates
+      sequencer.c: use ref transactions for all ref updates
+      fast-import.c: change update_branch to use ref transactions
+      branch.c: use ref transaction for all ref updates
+      refs.c: change update_ref to use a transaction
+      receive-pack.c: use a reference transaction for updating the refs
+      fast-import.c: use a ref transaction when dumping tags
+      walker.c: use ref transaction for ref updates
+      refs.c: make lock_ref_sha1 static
+      refs.c: remove the update_ref_lock function
+      refs.c: remove the update_ref_write function
+      refs.c: remove lock_ref_sha1
+      refs.c: make prune_ref use a transaction to delete the ref
+      refs.c: make delete_ref use a transaction
+      wrapper.c: remove/unlink_or_warn: simplify, treat ENOENT as success
+      refs.c: lock_ref_sha1_basic is used for all refs
+      wrapper.c: add a new function unlink_or_msg
+      refs.c: add an err argument to delete_ref_loose
+      refs.c: pass the ref log message to _create/delete/update instead of _commit
+      rename_ref: don't ask read_ref_full where the ref came from
+      refs.c: refuse to lock badly named refs in lock_ref_sha1_basic
+      refs.c: call lock_ref_sha1_basic directly from commit
+      refs.c: pass a list of names to skip to is_refname_available
+      refs.c: ref_transaction_commit: distinguish name conflicts from other errors
+      fetch.c: change s_update_ref to use a ref transaction
+      refs.c: make write_ref_sha1 static
+      refs.c: change resolve_ref_unsafe reading argument to be a flags field
+      branch -d: simplify by using RESOLVE_REF_READING
+      test: put tests for handling of bad ref names in one place
+      refs.c: allow listing and deleting badly named refs
+      for-each-ref: skip and warn about broken ref names
+      remote rm/prune: print a message when writing packed-refs fails
+
+Sebastian Schuberth (3):
+      subtree: add an install-html target
+      contacts: add a Makefile to generate docs and install
+      gitk: Do not depend on Cygwin's "kill" command on Windows
+
+Sergey Organov (1):
+      Documentation/git-rebase.txt: document when --fork-point is auto-enabled
+
+Sergey Senozhatsky (1):
+      compat-util: add _DEFAULT_SOURCE define
+
+Stefan Beller (12):
+      remote.c: don't leak the base branch name in format_tracking_info
+      clone.c: don't leak memory in cmd_clone
+      prepare_revision_walk(): check for return value in all places
+      builtin/blame.c: add translation to warning about failed revision walk
+      mailsplit.c: remove dead code
+      help: fix the size passed to qsort
+      t9300-fast-import: fix typo in test description
+      t6031-test-merge-recursive: do not forget to add file to be committed
+      merge-recursive: fix copy-paste mistake
+      merge-recursive: remove stale commented debugging code
+      transport: free leaking head in transport_print_push_status()
+      .mailmap: add Stefan Bellers corporate mail address
+
+Steffen Prohaska (8):
+      convert: drop arguments other than 'path' from would_convert_to_git()
+      config.c: add git_env_ulong() to parse environment variable
+      memory_limit: use git_env_ulong() to parse GIT_ALLOC_LIMIT
+      mmap_limit: introduce GIT_MMAP_LIMIT to allow testing expected mmap size
+      copy_fd(): do not close the input file descriptor
+      convert: stream from fd to required clean filter to reduce used address space
+      Documentation: use single-parameter --cacheinfo in example
+      sha1_file: don't convert off_t to size_t too early to avoid potential die()
+
+Sveinung Kvilhaugsvik (1):
+      git-svn.txt: advertise pushurl with dcommit
+
+Tanay Abhra (24):
+      add `config_set` API for caching config-like files
+      test-config: add tests for the config_set API
+      pretty.c: make git_pretty_formats_config return -1 on git_config_string failure
+      add line number and file name info to `config_set`
+      change `git_config()` return value to void
+      config: add `git_die_config()` to the config-set API
+      rewrite git_config() to use the config-set API
+      add a test for semantic errors in config files
+      add tests for `git_config_get_string_const()`
+      daemon.c: replace `git_config()` with `git_config_get_bool()` family
+      http-backend.c: replace `git_config()` with `git_config_get_bool()` family
+      read-cache.c: replace `git_config()` with `git_config_get_*()` family
+      archive.c: replace `git_config()` with `git_config_get_bool()` family
+      fetchpack.c: replace `git_config()` with `git_config_get_*()` family
+      rerere.c: replace `git_config()` with `git_config_get_*()` family
+      builtin/gc.c: replace `git_config()` with `git_config_get_*()` family
+      pager.c: replace `git_config()` with `git_config_get_value()`
+      imap-send.c: replace `git_config()` with `git_config_get_*()` family
+      alias.c: replace `git_config()` with `git_config_get_string()`
+      branch.c: replace `git_config()` with `git_config_get_string()
+      fast-import.c: replace `git_config()` with `git_config_get_*()` family
+      ll-merge.c: refactor `read_merge_config()` to use `git_config_string()`
+      merge-recursive.c: replace `git_config()` with `git_config_get_int()`
+      builtin/apply.c: replace `git_config()` with `git_config_get_string_const()`
+
+Thomas Braun (2):
+      pretty: note that %cd respects the --date= option
+      completion: Add --ignore-blank-lines for diff
+
+Tony Finch (2):
+      imap-send: clarify CRAM-MD5 vs LOGIN documentation
+      imap-send: create target mailbox if it is missing
+
+Torsten Bögershausen (2):
+      t0027: Tests for core.eol=native, eol=lf, eol=crlf
+      core.filemode may need manual action
+
+W. Trevor King (2):
+      pre-push.sample: Write error message to stderr
+      t1304: Set LOGNAME even if USER is unset or null
+
+brian m. carlson (8):
+      archive: honor tar.umask even for pax headers
+      imap-send doc: omit confusing "to use imap-send" modifier
+      Documentation: adjust document title underlining
+      Documentation: fix mismatched delimiters in git-imap-send
+      Documentation: move some AsciiDoc parameters into variables
+      Documentation: implement linkgit macro for Asciidoctor
+      Documentation: refactor common operations into variables
+      Documentation: remove Asciidoctor linkgit macro
+
+
 Version v2.1.4; changes since v2.1.3:
 -------------------------------------
 
@@ -278,7 +2528,7 @@ Tony Finch (1):
       git-push: fix link in man page
 
 
-Version v2.1.0-rc0; changes since v2.0.4:
+Version v2.1.0-rc0; changes since v2.0.5:
 -----------------------------------------
 
 Anders Kaseorg (1):
@@ -929,6 +3179,33 @@ Yi EungJun (1):
       .gitignore: "git-verify-commit" is a generated file
 
 
+Version v2.0.5; changes since v2.0.4:
+-------------------------------------
+
+Jeff King (8):
+      unpack-trees: propagate errors adding entries to the index
+      read-tree: add tests for confusing paths like ".." and ".git"
+      verify_dotfile(): reject .git case-insensitively
+      t1450: refactor ".", "..", and ".git" fsck tests
+      fsck: notice .git case-insensitively
+      utf8: add is_hfs_dotgit() helper
+      read-cache: optionally disallow HFS+ .git variants
+      fsck: complain about HFS+ ".git" aliases in trees
+
+Johannes Schindelin (3):
+      path: add is_ntfs_dotgit() helper
+      read-cache: optionally disallow NTFS .git variants
+      fsck: complain about NTFS ".git" aliases in trees
+
+Junio C Hamano (3):
+      Git 1.8.5.6
+      Git 1.9.5
+      Git 2.0.5
+
+Wieland Hoffmann (1):
+      git-tag.txt: Add a missing hyphen to `-s`
+
+
 Version v2.0.4; changes since v2.0.3:
 -------------------------------------
 
@@ -1333,7 +3610,7 @@ Kyle J. McKay (3):
       ewah_bitmap.c: do not assume size_t and eword_t are the same size
 
 
-Version v2.0.0-rc0; changes since v1.9.4:
+Version v2.0.0-rc0; changes since v1.9.5:
 -----------------------------------------
 
 Adam (1):
@@ -1776,6 +4053,42 @@ dequis (1):
 
 Дилян Палаузов (1):
       Makefile: describe CHARSET_LIB better
+
+
+Version v1.9.5; changes since v1.9.4:
+-------------------------------------
+
+Jeff King (9):
+      t7300: repair filesystem permissions with test_when_finished
+      unpack-trees: propagate errors adding entries to the index
+      read-tree: add tests for confusing paths like ".." and ".git"
+      verify_dotfile(): reject .git case-insensitively
+      t1450: refactor ".", "..", and ".git" fsck tests
+      fsck: notice .git case-insensitively
+      utf8: add is_hfs_dotgit() helper
+      read-cache: optionally disallow HFS+ .git variants
+      fsck: complain about HFS+ ".git" aliases in trees
+
+Johannes Schindelin (3):
+      path: add is_ntfs_dotgit() helper
+      read-cache: optionally disallow NTFS .git variants
+      fsck: complain about NTFS ".git" aliases in trees
+
+Junio C Hamano (2):
+      Git 1.8.5.6
+      Git 1.9.5
+
+René Scharfe (1):
+      annotate: use argv_array
+
+Ronnie Sahlberg (1):
+      enums: remove trailing ',' after last item in enum
+
+Wieland Hoffmann (1):
+      git-tag.txt: Add a missing hyphen to `-s`
+
+brian m. carlson (1):
+      Documentation: fix missing text for rev-parse --verify
 
 
 Version v1.9.4; changes since v1.9.3:
