@@ -1,4 +1,4 @@
-git (1:2.4.6-0.1) unstable; urgency=medium
+git (1:2.4.6-1) unstable; urgency=medium
 
   * new upstream release (see RelNotes/2.[234].*.txt).
   * debian/rules: use install-html target for git-subtree docs
@@ -7,7 +7,7 @@ git (1:2.4.6-0.1) unstable; urgency=medium
   * gitweb.apache2.conf: make configuration conditional on MIME
     support (thx Uwe Storbeck; closes: #775236).
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Mon, 12 Jan 2015 17:56:39 -0800
+ -- Jonathan Nieder <jrnieder@gmail.com>  Tue, 21 Jul 2015 12:08:09 -0700
 
 git (1:2.1.4-2.1) unstable; urgency=medium
 
