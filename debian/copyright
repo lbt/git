@@ -26,7 +26,7 @@ Copyright: © 2005-2015, Paul Mackerras, et al.
 License: GPL-2+
 
 Files: gitk-git/po/bg.po
-Copyright: © 2014, Alexander Shopov <ash@kambanaria.org>
+Copyright: © 2014, 2015 Alexander Shopov <ash@kambanaria.org>
 License: GPL-2
 Comment: This file is distributed under the same license as the git package.
 

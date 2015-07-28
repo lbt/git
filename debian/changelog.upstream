@@ -1,3 +1,611 @@
+Version v2.5.0; changes since v2.5.0-rc3:
+-----------------------------------------
+
+Junio C Hamano (4):
+      Revert "git-am: add am.threeWay config variable"
+      RelNotes: am.threeWay does not exist (yet)
+      Git 2.4.7
+      Git 2.5
+
+
+Version v2.5.0-rc3; changes since v2.5.0-rc2:
+---------------------------------------------
+
+Alex Henrie (2):
+      l10n: ca.po: update translation
+      l10n: ca.po: update translation
+
+Alexander Shopov (2):
+      l10n: Updated Bulgarian translation of git (2355t,0f,0u)
+      l10n: Updated Bulgarian translation of git (2359t,0f,0u)
+
+Dimitriy Ryazantcev (1):
+      l10n: ru.po: update Russian translation
+
+Eric Sunshine (2):
+      Documentation/git-worktree: fix stale "git checkout --to" references
+      Documentation/git: fix stale "MULTIPLE CHECKOUT MODE" reference
+
+Jean-Noel Avila (2):
+      l10n: fr.po v2.5.0-rc0 (2355t)
+      l10n: fr v2.5.0 round 2 (2359t)
+
+Jiang Xin (4):
+      l10n: git.pot: v2.5.0 round 1 (65 new, 15 removed)
+      l10n: zh_CN: for git v2.5.0 l10n round 1
+      l10n: git.pot: v2.5.0 round 2 (9 new, 5 removed)
+      l10n: zh_CN: for git v2.5.0 l10n round 2
+
+Junio C Hamano (3):
+      Git 2.4.6
+      worktree: caution that this is still experimental
+      Git 2.5.0-rc3
+
+Peter Krefting (2):
+      l10n: sv.po: Update Swedish translation (2355t0f0u)
+      l10n: sv.po: Update Swedish translation (2359t0f0u)
+
+Ralf Thielow (4):
+      l10n: de.po: fix translation of "head nodes"
+      l10n: de.po: translate "index" as "Index"
+      l10n: de.po: translate 65 new messages
+      l10n: de.po: translate 9 new messages
+
+René Scharfe (1):
+      diff: parse ws-error-highlight option more strictly
+
+Stefan Beller (1):
+      revision.c: remove unneeded check for NULL
+
+Tony Finch (1):
+      gitweb: fix typo in man page
+
+Trần Ngọc Quân (2):
+      l10n: Updated Vietnamese translation (2355t)
+      l10n: Updated Vietnamese translation (2359t)
+
+
+Version v2.5.0-rc2; changes since v2.5.0-rc1:
+---------------------------------------------
+
+Charles Bailey (3):
+      contrib/subtree: use tabs consitently for indentation in tests
+      contrib/subtree: fix broken &&-chains and revealed test error
+      contrib/subtree: small tidy-up to test
+
+Clemens Buchacher (1):
+      rebase: return non-zero error code if format-patch fails
+
+Enrique Tobis (1):
+      http: always use any proxy auth method available
+
+Eric Sunshine (23):
+      Documentation/git-checkout: fix incorrect worktree prune command
+      Documentation/git-worktree: associate options with commands
+      Documentation: move linked worktree description from checkout to worktree
+      Documentation/git-worktree: add BUGS section
+      Documentation/git-worktree: split technical info from general description
+      Documentation/git-worktree: add high-level 'lock' overview
+      Documentation/git-worktree: add EXAMPLES section
+      checkout: fix bug with --to and relative HEAD
+      checkout: relocate --to's "no branch specified" check
+      checkout: prepare_linked_checkout: drop now-unused 'new' argument
+      checkout: make --to unconditionally verbose
+      checkout: drop 'checkout_opts' dependency from prepare_linked_checkout
+      worktree: introduce "add" command
+      worktree: add --force option
+      worktree: add --detach option
+      worktree: add -b/-B options
+      tests: worktree: retrofit "checkout --to" tests for "worktree add"
+      checkout: retire --to option
+      checkout: require worktree unconditionally
+      worktree: extract basename computation to new function
+      worktree: add: make -b/-B default to HEAD when <branch> is omitted
+      worktree: add: auto-vivify new branch when <branch> is omitted
+      checkout: retire --ignore-other-worktrees in favor of --force
+
+Jeff King (4):
+      docs: clarify that --encoding can produce invalid sequences
+      for_each_packed_object: automatically open pack index
+      rev-list: disable --use-bitmap-index when pruning commits
+      check_and_freshen_file: fix reversed success-check
+
+Johannes Schindelin (2):
+      t3404: demonstrate CHERRY_PICK_HEAD bug
+      rebase -i: do not leave a CHERRY_PICK_HEAD file behind
+
+Junio C Hamano (6):
+      fsck: it is OK for a tag and a commit to lack the body
+      pager: do not leak "GIT_PAGER_IN_USE" to the pager
+      index-pack: fix allocation of sorted_by_pos array
+      The last minute bits of fixes
+      Revert "checkout: retire --ignore-other-worktrees in favor of --force"
+      Git 2.5.0-rc2
+
+Karsten Blees (2):
+      config.c: fix writing config files on Windows network shares
+      Makefile / racy-git.txt: clarify USE_NSEC prerequisites
+
+Lawrence Siebert (1):
+      rev-list: add --count to usage guide
+
+Matthieu Moy (3):
+      git-multimail: update to release 1.1.1
+      Documentation/branch: document -d --force and -m --force
+      Documentation/branch: document -M and -D in terms of --force
+
+Michael Haggerty (1):
+      strbuf: strbuf_read_file() should return ssize_t
+
+Nguyễn Thái Ngọc Duy (3):
+      checkout: don't check worktrees when not necessary
+      worktree: new place for "git prune --worktrees"
+      Add tests for wildcard "path vs ref" disambiguation
+
+Richard Hansen (2):
+      Revert "test-lib.sh: do tests for color support after changing HOME"
+      test-lib.sh: fix color support when tput needs ~/.terminfo
+
+Sebastian Schuberth (1):
+      clone: simplify string handling in guess_dir_name()
+
+Stefan Beller (1):
+      p5310: Fix broken && chain in performance test
+
+Torsten Bögershausen (1):
+      git-checkout.txt: document "git checkout <pathspec>" better
+
+
+Version v2.5.0-rc1; changes since v2.5.0-rc0:
+---------------------------------------------
+
+Joe Cridge (1):
+      git-prompt.sh: document GIT_PS1_STATESEPARATOR
+
+Junio C Hamano (1):
+      Git 2.5.0-rc1
+
+Matthieu Moy (1):
+      Documentation/describe: improve one-line summary
+
+Michael J Gruber (1):
+      mergetool-lib: fix default tool selection
+
+Mike Edgar (1):
+      fetch-pack: check for shallow if depth given
+
+
+Version v2.5.0-rc0; changes since v2.4.7:
+-----------------------------------------
+
+Allen Hubbe (1):
+      send-email: add sendmail email aliases format
+
+Blair Holloway (1):
+      git-p4: fix filetype detection on files opened exclusively
+
+Christian Neukirchen (1):
+      cvsimport: silence regex warning appearing in Perl 5.22.
+
+Danny Lin (2):
+      contrib/subtree: there's no push --squash
+      contrib/subtree: portability fix for string printing
+
+David Aguilar (2):
+      mergetool--lib: set IFS for difftool and mergetool
+      mergetools: add winmerge as a builtin tool
+
+David Turner (3):
+      tree-walk: learn get_tree_entry_follow_symlinks
+      sha1_name: get_sha1_with_context learns to follow symlinks
+      cat-file: add --follow-symlinks to --batch
+
+Dennis Kaarsemaker (1):
+      checkout: don't require a work tree when checking out into a new one
+
+Eric Sunshine (14):
+      command-list: prepare machinery for upcoming "common groups" section
+      generate-cmdlist: parse common group commands
+      send-email: further document missing sendmail aliases functionality
+      send-email: visually distinguish sendmail aliases parser warnings
+      send-email: drop noise comments which merely repeat what code says
+      send-email: fix style: cuddle 'elsif' and 'else' with closing brace
+      send-email: refactor sendmail aliases parser
+      send-email: simplify sendmail aliases comment and blank line recognizer
+      send-email: implement sendmail aliases line continuation support
+      t9001: refactor sendmail aliases test infrastructure
+      t9001: add sendmail aliases line continuation tests
+      send-email: further warn about unsupported sendmail aliases features
+      config.mak.uname: Darwin: define HAVE_GETDELIM for modern OS X releases
+      configure: add getdelim() check
+
+Fredrik Medley (3):
+      config.txt: clarify allowTipSHA1InWant with camelCase
+      upload-pack: prepare to extend allow-tip-sha1-in-want
+      upload-pack: optionally allow fetching reachable sha1
+
+Jeff King (29):
+      strbuf_getwholeline: use getc macro
+      git-compat-util: add fallbacks for unlocked stdio
+      strbuf_getwholeline: use getc_unlocked
+      config: use getc_unlocked when reading from file
+      strbuf_addch: avoid calling strbuf_grow
+      strbuf_getwholeline: avoid calling strbuf_grow
+      strbuf_getwholeline: use getdelim if it is available
+      read_packed_refs: avoid double-checking sane refs
+      t1430: add another refs-escape test
+      test-lib: turn on GIT_TEST_CHAIN_LINT by default
+      remote.c: drop default_remote_name variable
+      progress: treat "no terminal" as being in the foreground
+      remote.c: refactor setup of branch->merge list
+      remote.c: drop "remote" pointer from "struct branch"
+      remote.c: hoist branch.*.remote lookup out of remote_get_1
+      remote.c: provide per-branch pushremote name
+      remote.c: hoist read_config into remote_get_1
+      remote.c: introduce branch_get_upstream helper
+      remote.c: report specific errors from branch_get_upstream
+      remote.c: untangle error logic in branch_get_upstream
+      remote.c: return upstream name from stat_tracking_info
+      remote.c: add branch_get_push
+      sha1_name: refactor upstream_mark
+      sha1_name: refactor interpret_upstream_mark
+      sha1_name: implement @{push} shorthand
+      for-each-ref: use skip_prefix instead of starts_with
+      for-each-ref: accept "%(push)" format
+      t7063: hide stderr from setup inside prereq
+      index-pack: fix truncation of off_t in comparison
+
+Johannes Sixt (5):
+      compat/mingw: stubs for getpgid() and tcgetpgrp()
+      lockfile: replace random() by rand()
+      help.c: wrap wait-only poll() invocation in sleep_millisec()
+      lockfile: convert retry timeout computations to millisecond
+      lockfile: wait using sleep_millisec() instead of select()
+
+Jonathan Nieder (1):
+      config: use error() instead of fprintf(stderr, ...)
+
+Junio C Hamano (38):
+      t2026: fix broken &&-chain
+      test: validate prerequistes syntax
+      merge: test the top-level merge driver
+      merge: simplify code flow
+      t5520: style fixes
+      t5520: test pulling an octopus into an unborn branch
+      merge: clarify "pulling into void" special case
+      merge: do not check argc to determine number of remote heads
+      merge: small leakfix and code simplification
+      merge: clarify collect_parents() logic
+      merge: split reduce_parents() out of collect_parents()
+      merge: narrow scope of merge_names
+      merge: extract prepare_merge_message() logic out
+      merge: make collect_parents() auto-generate the merge message
+      merge: decide if we auto-generate the message early in collect_parents()
+      merge: handle FETCH_HEAD internally
+      merge: deprecate 'git merge <message> HEAD <commit>' syntax
+      First batch for 2.5 cycle
+      Second batch for 2.5 cycle
+      Third batch for 2.5 cycle
+      copy.c: make copy_fd() report its status silently
+      filter_buffer_or_fd(): ignore EPIPE
+      Fourth batch for 2.5 cycle
+      t4015: modernise style
+      t4015: separate common setup and per-test expectation
+      Fifth batch for 2.5 cycle
+      diff.c: add emit_del_line() and emit_context_line()
+      diff.c: --ws-error-highlight=<kind> option
+      t9001: write $HOME/, not ~/, to help shells without tilde expansion
+      apply: reject a hunk that does not do anything
+      Sixth batch for 2.5 cycle
+      ll-merge: pass the original path to external drivers
+      The first half of the seventh batch for 2.5
+      Second half of seventh batch
+      Eighth batch for 2.5
+      Revert "diff-lib.c: adjust position of i-t-a entries in diff"
+      Ninth batch for 2.5
+      Git 2.5.0-rc0
+
+Karthik Nayak (4):
+      sha1_file: support reading from a loose object of unknown type
+      cat-file: make the options mutually exclusive
+      cat-file: teach cat-file a '--allow-unknown-type' option
+      t1006: add tests for git cat-file --allow-unknown-type
+
+Lars Kellogg-Stedman (1):
+      http: add support for specifying an SSL cipher list
+
+Lex Spoon (1):
+      git-p4: use -m when running p4 changes
+
+Luke Diamand (11):
+      git-p4: fix small bug in locked test scripts
+      git-p4: small fix for locked-file-move-test
+      git-p4: t9814: prevent --chain-lint failure
+      git-p4: add failing tests for case-folding p4d
+      git-p4: add failing test for P4EDITOR handling
+      git-p4: fix handling of multi-word P4EDITOR
+      git-p4: tests: use test-chmtime in place of touch
+      git-p4: additional testing of --changes-block-size
+      git-p4: test with limited p4 server results
+      git-p4: add tests for non-numeric revision range
+      git-p4: fixing --changes-block-size handling
+
+Luke Mewburn (1):
+      progress: no progress in background
+
+Matthieu Moy (6):
+      t3701-add-interactive: simplify code
+      add -p: demonstrate failure when running 'edit' after a split
+      t3904-stash-patch: fix test description
+      t3904-stash-patch: factor PERL prereq at the top of the file
+      stash -p: demonstrate failure of split with mixed y/n
+      git-multimail: update to release 1.1.0
+
+Max Kirillov (3):
+      checkout: do not fail if target is an empty directory
+      git-common-dir: make "modules/" per-working-directory directory
+      prune --worktrees: fix expire vs worktree existence condition
+
+Michael Haggerty (66):
+      lockfile: allow file locking to be retried with a timeout
+      lock_packed_refs(): allow retries when acquiring the packed-refs lock
+      each_ref_fn: change to take an object_id parameter
+      builtin/rev-parse: rewrite to take an object_id argument
+      handle_one_ref(): rewrite to take an object_id argument
+      register_ref(): rewrite to take an object_id argument
+      append_ref(): rewrite to take an object_id argument
+      add_pending_uninteresting_ref(): rewrite to take an object_id argument
+      get_name(): rewrite to take an object_id argument
+      builtin/fetch: rewrite to take an object_id argument
+      grab_single_ref(): rewrite to take an object_id argument
+      name_ref(): rewrite to take an object_id argument
+      builtin/pack-objects: rewrite to take an object_id argument
+      show_ref_cb(): rewrite to take an object_id argument
+      builtin/reflog: rewrite ref functions to take an object_id argument
+      add_branch_for_removal(): rewrite to take an object_id argument
+      add_branch_for_removal(): don't set "util" field of string_list entries
+      builtin/remote: rewrite functions to take object_id arguments
+      show_reference(): rewrite to take an object_id argument
+      append_matching_ref(): rewrite to take an object_id argument
+      builtin/show-branch: rewrite functions to take object_id arguments
+      append_one_rev(): rewrite to work with object_id
+      builtin/show-branch: rewrite functions to work with object_id
+      cmd_show_branch(): fix error message
+      fsck: change functions to use object_id
+      builtin/show-ref: rewrite to use object_id
+      show_ref(): convert local variable peeled to object_id
+      builtin/show-ref: rewrite to take an object_id argument
+      append_similar_ref(): rewrite to take an object_id argument
+      http-backend: rewrite to take an object_id argument
+      show_head_ref(): convert local variable "unused" to object_id
+      add_ref_decoration(): rewrite to take an object_id argument
+      add_ref_decoration(): convert local variable original_sha1 to object_id
+      string_list_add_one_ref(): rewrite to take an object_id argument
+      add_one_ref(): rewrite to take an object_id argument
+      remote: rewrite functions to take object_id arguments
+      register_replace_ref(): rewrite to take an object_id argument
+      handle_one_reflog(): rewrite to take an object_id argument
+      add_info_ref(): rewrite to take an object_id argument
+      handle_one_ref(): rewrite to take an object_id argument
+      shallow: rewrite functions to take object_id arguments
+      submodule: rewrite to take an object_id argument
+      write_refs_to_temp_dir(): convert local variable sha1 to object_id
+      write_one_ref(): rewrite to take an object_id argument
+      find_symref(): rewrite to take an object_id argument
+      find_symref(): convert local variable "unused" to object_id
+      upload-pack: rewrite functions to take object_id arguments
+      send_ref(): convert local variable "peeled" to object_id
+      mark_complete(): rewrite to take an object_id argument
+      clear_marks(): rewrite to take an object_id argument
+      mark_complete_oid(): new function, taking an object_oid
+      mark_complete(): remove unneeded arguments
+      rev_list_insert_ref_oid(): new function, taking an object_oid
+      rev_list_insert_ref(): remove unneeded arguments
+      each_ref_fn_adapter(): remove adapter
+      warn_if_dangling_symref(): convert local variable "junk" to object_id
+      struct ref_lock: convert old_sha1 member to object_id
+      verify_lock(): return 0/-1 rather than struct ref_lock *
+      verify_lock(): on errors, let the caller unlock the lock
+      verify_lock(): report errors via a strbuf
+      verify_lock(): do not capitalize error messages
+      ref_transaction_commit(): do not capitalize error messages
+      t6301: new tests of for-each-ref error handling
+      for-each-ref: report broken references correctly
+      read_loose_refs(): simplify function logic
+      read_loose_refs(): treat NULL_SHA1 loose references as broken
+
+Miguel Torroja (1):
+      p4: retrieve the right revision of the file in UTF-16 codepath
+
+Mike Hommey (1):
+      show-branch: show all local heads when only giving one rev along --topics
+
+Nguyễn Thái Ngọc Duy (63):
+      path.c: make get_pathname() return strbuf instead of static buffer
+      path.c: make get_pathname() call sites return const char *
+      git_snpath(): retire and replace with strbuf_git_path()
+      path.c: rename vsnpath() to do_git_path()
+      path.c: group git_path(), git_pathdup() and strbuf_git_path() together
+      git_path(): be aware of file relocation in $GIT_DIR
+      *.sh: respect $GIT_INDEX_FILE
+      reflog: avoid constructing .lock path with git_path
+      fast-import: use git_path() for accessing .git dir instead of get_git_dir()
+      commit: use SEQ_DIR instead of hardcoding "sequencer"
+      $GIT_COMMON_DIR: a new environment variable
+      git-sh-setup.sh: use rev-parse --git-path to get $GIT_DIR/objects
+      *.sh: avoid hardcoding $GIT_DIR/hooks/...
+      git-stash: avoid hardcoding $GIT_DIR/logs/....
+      setup.c: convert is_git_directory() to use strbuf
+      setup.c: detect $GIT_COMMON_DIR in is_git_directory()
+      setup.c: convert check_repository_format_gently to use strbuf
+      setup.c: detect $GIT_COMMON_DIR check_repository_format_gently()
+      setup.c: support multi-checkout repo setup
+      wrapper.c: wrapper to open a file, fprintf then close
+      use new wrapper write_file() for simple file writing
+      checkout: support checking out into a new working directory
+      prune: strategies for linked checkouts
+      checkout: reject if the branch is already checked out elsewhere
+      checkout: clean up half-prepared directories in --to mode
+      gc: style change -- no SP before closing parenthesis
+      gc: factor out gc.pruneexpire parsing code
+      gc: support prune --worktrees
+      count-objects: report unused files in $GIT_DIR/worktrees/...
+      git_path(): keep "info/sparse-checkout" per work-tree
+      t2025: add a test to make sure grafts is working from a linked checkout
+      checkout: pass whole struct to parse_branchname_arg instead of individual flags
+      checkout: add --ignore-other-wortrees
+      git-checkout.txt: a note about multiple checkout support for submodules
+      index-pack: reduce object_entry size to save memory
+      dir.c: optionally compute sha-1 of a .gitignore file
+      untracked cache: record .gitignore information and dir hierarchy
+      untracked cache: initial untracked cache validation
+      untracked cache: invalidate dirs recursively if .gitignore changes
+      untracked cache: make a wrapper around {open,read,close}dir()
+      untracked cache: record/validate dir mtime and reuse cached output
+      untracked cache: mark what dirs should be recursed/saved
+      untracked cache: don't open non-existent .gitignore
+      ewah: add convenient wrapper ewah_serialize_strbuf()
+      untracked cache: save to an index extension
+      untracked cache: load from UNTR index extension
+      untracked cache: invalidate at index addition or removal
+      read-cache.c: split racy stat test to a separate function
+      untracked cache: avoid racy timestamps
+      untracked cache: print stats with $GIT_TRACE_UNTRACKED_STATS
+      untracked cache: mark index dirty if untracked cache is updated
+      untracked-cache: temporarily disable with $GIT_DISABLE_UNTRACKED_CACHE
+      status: enable untracked cache
+      update-index: manually enable or disable untracked cache
+      update-index: test the system before enabling untracked cache
+      t7063: tests for untracked cache
+      mingw32: add uname()
+      untracked cache: guard and disable on system changes
+      git-status.txt: advertisement for untracked cache
+      diff-lib.c: adjust position of i-t-a entries in diff
+      index-pack: kill union delta_base to save memory
+      pathspec: avoid the need of "--" when wildcard is used
+      read-cache: fix untracked cache invalidation when split-index is used
+
+Paul Tan (16):
+      t5520: prevent field splitting in content comparisons
+      t5520: test no merge candidates cases
+      t5520: test for failure if index has unresolved entries
+      t5520: test work tree fast-forward when fetch updates head
+      t5520: test --rebase with multiple branches
+      t5520: test --rebase failure on unborn branch with index
+      t5521: test --dry-run does not make any changes
+      t5520: check reflog action in fast-forward merge
+      pull: handle git-fetch's options as well
+      pull: use git-rev-parse --parseopt for option parsing
+      am --skip: revert changes introduced by failed 3way merge
+      am -3: support 3way merge on unborn branch
+      am --skip: support skipping while on unborn branch
+      am --abort: revert changes introduced by failed 3way merge
+      am --abort: support aborting to unborn branch
+      am --abort: keep unrelated commits on unborn branch
+
+Quentin Neill (1):
+      blame: add blame.showEmail configuration
+
+Ramsay Allan Jones (1):
+      t7502-commit.sh: fix a broken and-chain
+
+Remi Lespinet (3):
+      git-am.sh: fix initialization of the threeway variable
+      t4150-am: refactor am -3 tests
+      git-am: add am.threeWay config variable
+
+SZEDER Gábor (6):
+      completion: remove redundant __git_compute_all_commands() call
+      completion: remove credential helpers from porcelain commands
+      completion: add a helper function to get config variables
+      completion: simplify query for config variables
+      completion: teach 'scissors' mode to 'git commit --cleanup='
+      commit: cope with scissors lines in commit message
+
+Stefan Beller (2):
+      prefix_path(): unconditionally free results in the callers
+      refs.c: remove lock_fd from struct ref_lock
+
+Sébastien Guimmara (4):
+      command-list.txt: fix whitespace inconsistency
+      command-list.txt: add the common groups block
+      command-list.txt: drop the "common" tag
+      help: respect new common command grouping
+
+Thomas Braun (1):
+      completion: suggest sequencer commands for revert
+
+Thomas Gummerer (1):
+      t1501: fix test with split index
+
+Thomas Schneider (1):
+      checkout: call a single commit "it" intead of "them"
+
+Torsten Bögershausen (4):
+      t2026 needs procondition SANITY
+      t0027: cleanup: rename functions; avoid non-leading TABs
+      t0027: support NATIVE_CRLF platforms
+      t0027: Add repoMIX and LF_nul
+
+Vitor Antunes (2):
+      t9801: check git-p4's branch detection with client spec enabled
+      git-p4: improve client path detection when branches are used
+
+brian m. carlson (11):
+      define a structure for object IDs
+      define utility functions for object IDs
+      bisect.c: convert leaf functions to use struct object_id
+      archive.c: convert to use struct object_id
+      zip: use GIT_SHA1_HEXSZ for trailers
+      bulk-checkin.c: convert to use struct object_id
+      diff: convert struct combine_diff_path to object_id
+      commit: convert parts to struct object_id
+      patch-id: convert to use struct object_id
+      apply: convert threeway_stage to object_id
+      refs: convert struct ref_entry to use struct object_id
+
+
+Version v2.4.7; changes since v2.4.6:
+-------------------------------------
+
+Clemens Buchacher (1):
+      rebase: return non-zero error code if format-patch fails
+
+Enrique Tobis (1):
+      http: always use any proxy auth method available
+
+Jeff King (4):
+      index-pack: avoid excessive re-reading of pack directory
+      docs: clarify that --encoding can produce invalid sequences
+      rev-list: disable --use-bitmap-index when pruning commits
+      check_and_freshen_file: fix reversed success-check
+
+Junio C Hamano (3):
+      fsck: it is OK for a tag and a commit to lack the body
+      pager: do not leak "GIT_PAGER_IN_USE" to the pager
+      Git 2.4.7
+
+Karsten Blees (1):
+      config.c: fix writing config files on Windows network shares
+
+Lawrence Siebert (1):
+      rev-list: add --count to usage guide
+
+Matthieu Moy (2):
+      Documentation/branch: document -d --force and -m --force
+      Documentation/branch: document -M and -D in terms of --force
+
+Michael Haggerty (1):
+      strbuf: strbuf_read_file() should return ssize_t
+
+Richard Hansen (2):
+      Revert "test-lib.sh: do tests for color support after changing HOME"
+      test-lib.sh: fix color support when tput needs ~/.terminfo
+
+Torsten Bögershausen (1):
+      git-checkout.txt: document "git checkout <pathspec>" better
+
+
 Version v2.4.6; changes since v2.4.5:
 -------------------------------------
 
