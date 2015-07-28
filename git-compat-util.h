@@ -187,6 +187,7 @@
 #elif defined(_MSC_VER)
 #include "compat/msvc.h"
 #else
+#include <sys/utsname.h>
 #include <sys/wait.h>
 #include <sys/resource.h>
 #include <sys/socket.h>
@@ -932,6 +933,12 @@ struct tm *git_gmtime_r(const time_t *, struct tm *);
 
 #ifndef SHELL_PATH
 # define SHELL_PATH "/bin/sh"
+#endif
+
+#ifndef _POSIX_THREAD_SAFE_FUNCTIONS
+#define flockfile(fh)
+#define funlockfile(fh)
+#define getc_unlocked(fh) getc(fh)
 #endif
 
 #endif
