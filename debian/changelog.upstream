@@ -1,3 +1,103 @@
+Version v2.5.3; changes since v2.5.2:
+-------------------------------------
+
+Alex Henrie (1):
+      git-submodule: remove extraneous space from error message
+
+Brett Randall (1):
+      git-svn doc: mention "svn-remote.<name>.include-paths"
+
+David Turner (2):
+      untracked-cache: support sparse checkout
+      untracked-cache: fix subdirectory handling
+
+Johannes Schindelin (1):
+      am --skip/--abort: merge HEAD/ORIG_HEAD tree into index
+
+Junio C Hamano (1):
+      Git 2.5.3
+
+Nguyễn Thái Ngọc Duy (2):
+      t7063: use --force-untracked-cache to speed up a bit
+      untracked cache: fix entry invalidation
+
+
+Version v2.5.2; changes since v2.5.1:
+-------------------------------------
+
+Andreas Schwab (1):
+      Documentation/config: fix inconsistent label on gc.*.reflogExpireUnreachable
+
+Christian Couder (3):
+      trailer: ignore first line of message
+      trailer: retitle a test and correct an in-comment message
+      trailer: support multiline title
+
+Clemens Buchacher (1):
+      git_open_noatime: return with errno=0 on success
+
+David Turner (1):
+      commit: don't rewrite shared index unnecessarily
+
+Eric Sunshine (1):
+      generate-cmdlist: re-implement as shell script
+
+Erik Elfström (1):
+      t7300: fix broken && chains
+
+Jeff King (9):
+      vreportf: report to arbitrary filehandles
+      vreportf: avoid intermediate buffer
+      config: silence warnings for command names with invalid keys
+      rev-list: make it obvious that we do not support notes
+      log: diagnose empty HEAD more clearly
+      verify_absent: allow filenames longer than PATH_MAX
+      notes: use a strbuf in add_non_note
+      read_info_alternates: handle paths larger than PATH_MAX
+      show-branch: use a strbuf for reflog descriptions
+
+Jim Hill (1):
+      strbuf_read(): skip unnecessary strbuf_grow() at eof
+
+Johannes Sixt (1):
+      t2019: skip test requiring '*' in a file name non Windows
+
+Junio C Hamano (5):
+      ps_matched: xcalloc() takes nmemb and then element size
+      Git 2.2.3
+      Git 2.3.9
+      Git 2.4.9
+      Git 2.5.2
+
+Michael Haggerty (4):
+      get_remote_group(): handle remotes with single-character names
+      get_remote_group(): rename local variable "space" to "wordlen"
+      get_remote_group(): eliminate superfluous call to strcspn()
+      get_remote_group(): use skip_prefix()
+
+Nguyễn Thái Ngọc Duy (1):
+      setup: update the right file in multiple checkouts
+
+Patrick Steinhardt (2):
+      tests: fix broken && chains in t1509-root-worktree
+      tests: fix cleanup after tests in t1509-root-worktree
+
+Philip Oakley (1):
+      po/README: Update directions for l10n contributors
+
+René Scharfe (3):
+      t5004: test ZIP archives with many entries
+      archive-zip: use a local variable to store the creator version
+      archive-zip: support more than 65535 entries
+
+SZEDER Gábor (2):
+      t3020: fix typo in test description
+      wt-status: move #include "pathspec.h" to the header
+
+Sven Strickroth (1):
+      config: close config file handle in case of error
+
+
 Version v2.5.1; changes since v2.5.0:
 -------------------------------------
 
@@ -240,7 +340,7 @@ Mike Edgar (1):
       fetch-pack: check for shallow if depth given
 
 
-Version v2.5.0-rc0; changes since v2.4.8:
+Version v2.5.0-rc0; changes since v2.4.9:
 -----------------------------------------
 
 Allen Hubbe (1):
@@ -616,6 +716,21 @@ brian m. carlson (11):
       patch-id: convert to use struct object_id
       apply: convert threeway_stage to object_id
       refs: convert struct ref_entry to use struct object_id
+
+
+Version v2.4.9; changes since v2.4.8:
+-------------------------------------
+
+Jeff King (4):
+      verify_absent: allow filenames longer than PATH_MAX
+      notes: use a strbuf in add_non_note
+      read_info_alternates: handle paths larger than PATH_MAX
+      show-branch: use a strbuf for reflog descriptions
+
+Junio C Hamano (3):
+      Git 2.2.3
+      Git 2.3.9
+      Git 2.4.9
 
 
 Version v2.4.8; changes since v2.4.7:
@@ -1211,7 +1326,7 @@ Thomas Ackermann (2):
       2.3.2 release notes: typofix
 
 
-Version v2.4.0-rc0; changes since v2.3.8:
+Version v2.4.0-rc0; changes since v2.3.9:
 -----------------------------------------
 
 Alex Henrie (3):
@@ -1463,6 +1578,20 @@ Torsten Bögershausen (1):
 
 Yi EungJun (1):
       http: add Accept-Language header if possible
+
+
+Version v2.3.9; changes since v2.3.8:
+-------------------------------------
+
+Jeff King (4):
+      verify_absent: allow filenames longer than PATH_MAX
+      notes: use a strbuf in add_non_note
+      read_info_alternates: handle paths larger than PATH_MAX
+      show-branch: use a strbuf for reflog descriptions
+
+Junio C Hamano (2):
+      Git 2.2.3
+      Git 2.3.9
 
 
 Version v2.3.8; changes since v2.3.7:
@@ -1943,7 +2072,7 @@ Tony Finch (1):
       git-prompt: preserve value of $? in all cases
 
 
-Version v2.3.0-rc0; changes since v2.2.2:
+Version v2.3.0-rc0; changes since v2.2.3:
 -----------------------------------------
 
 Alfred Perlstein (1):
@@ -2169,6 +2298,19 @@ brian m. carlson (3):
 Роман Донченко (2):
       send-email: align RFC 2047 decoding more closely with the spec
       send-email: handle adjacent RFC 2047-encoded words properly
+
+
+Version v2.2.3; changes since v2.2.2:
+-------------------------------------
+
+Jeff King (4):
+      verify_absent: allow filenames longer than PATH_MAX
+      notes: use a strbuf in add_non_note
+      read_info_alternates: handle paths larger than PATH_MAX
+      show-branch: use a strbuf for reflog descriptions
+
+Junio C Hamano (1):
+      Git 2.2.3
 
 
 Version v2.2.2; changes since v2.2.1:
