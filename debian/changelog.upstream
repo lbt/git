@@ -1,3 +1,25 @@
+Version v2.6.1; changes since v2.6.0:
+-------------------------------------
+
+Blake Burkhart (2):
+      http: limit redirection to protocol-whitelist
+      http: limit redirection depth
+
+Jeff King (6):
+      transport: add a protocol-whitelist environment variable
+      submodule: allow only certain protocols for submodule fetches
+      transport: refactor protocol whitelist code
+      react to errors in xdi_diff
+      xdiff: reject files larger than ~1GB
+      merge-file: enforce MAX_XDIFF_SIZE on incoming files
+
+Junio C Hamano (4):
+      Git 2.3.10
+      Git 2.4.10
+      Git 2.5.4
+      Git 2.6.1
+
+
 Version v2.6.0; changes since v2.6.0-rc3:
 -----------------------------------------
 
@@ -151,7 +173,7 @@ Junio C Hamano (2):
       Git 2.6-rc1
 
 
-Version v2.6.0-rc0; changes since v2.5.3:
+Version v2.6.0-rc0; changes since v2.5.4:
 -----------------------------------------
 
 Alex Henrie (3):
@@ -566,6 +588,27 @@ brian m. carlson (7):
       gpg: centralize printing signature buffers
       verify-commit: add option to print raw gpg status information
       verify-tag: add option to print raw gpg status information
+
+
+Version v2.5.4; changes since v2.5.3:
+-------------------------------------
+
+Blake Burkhart (2):
+      http: limit redirection to protocol-whitelist
+      http: limit redirection depth
+
+Jeff King (6):
+      transport: add a protocol-whitelist environment variable
+      submodule: allow only certain protocols for submodule fetches
+      transport: refactor protocol whitelist code
+      react to errors in xdi_diff
+      xdiff: reject files larger than ~1GB
+      merge-file: enforce MAX_XDIFF_SIZE on incoming files
+
+Junio C Hamano (3):
+      Git 2.3.10
+      Git 2.4.10
+      Git 2.5.4
 
 
 Version v2.5.3; changes since v2.5.2:
