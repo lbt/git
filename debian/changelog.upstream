@@ -1,3 +1,67 @@
+Version v2.6.2; changes since v2.6.1:
+-------------------------------------
+
+Alex Henrie (2):
+      merge: grammofix in please-commit-before-merge message
+      pull: enclose <options> in brackets in the usage string
+
+Christian Couder (2):
+      quote: fix broken sq_quote_buf() related comment
+      quote: move comment before sq_quote_buf()
+
+Eric N. Vander Weele (1):
+      log: Update log.follow doc and add to config.txt
+
+Jacob Keller (1):
+      notes: correct documentation of DWIMery for notes references
+
+Jeff King (3):
+      git_connect: clear GIT_* environment for ssh
+      git_connect: clarify conn->use_shell flag
+      blame: handle --first-parent
+
+Johannes Schindelin (1):
+      setup: fix "inside work tree" detection on case-insensitive filesystems
+
+John Keeping (2):
+      Makefile: fix MAKEFLAGS tests with multiple flags
+      Documentation: fix section header mark-up
+
+Junio C Hamano (3):
+      Makefile: allow $(ARFLAGS) specified from the command line
+      fsck: exit with non-zero when problems are found
+      Git 2.6.2
+
+Matthieu Moy (7):
+      Documentation: use 'keyid' consistently, not 'key-id'
+      Documentation/grep: fix documentation of -O
+      Documentation: explain optional arguments better
+      t3203: test 'detached at' after checkout --detach
+      status: don't say 'HEAD detached at HEAD'
+      rebase-i: explicitly accept tab as separator in commands
+      rebase-i: loosen over-eager check_bad_cmd check
+
+Michael J Gruber (1):
+      t2026: rename worktree prune test
+
+Nguyễn Thái Ngọc Duy (1):
+      ls-remote.txt: delete unsupported option
+
+Renee Margaret McConahy (1):
+      am: configure gpg at startup
+
+Stephan Beyer (2):
+      t5561: get rid of racy appending to logfile
+      t/perf: make runner work even if Git is not installed
+
+Takashi Iwai (1):
+      pager: don't use unsafe functions in signal handlers
+
+Tobias Klauser (2):
+      connect: fix typo in result string of prot_name()
+      Documentation/interpret-trailers: Grammar fix
+
+
 Version v2.6.1; changes since v2.6.0:
 -------------------------------------
 
