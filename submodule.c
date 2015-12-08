@@ -122,20 +122,14 @@ static int add_submodule_odb(const char *path)
 	struct strbuf objects_directory = STRBUF_INIT;
 	struct alternate_object_database *alt_odb;
 	int ret = 0;
-	const char *git_dir;
 
-	strbuf_addf(&objects_directory, "%s/.git", path);
-	git_dir = read_gitfile(objects_directory.buf);
-	if (git_dir) {
-		strbuf_reset(&objects_directory);
-		strbuf_addstr(&objects_directory, git_dir);
-	}
-	strbuf_addstr(&objects_directory, "/objects/");
+	strbuf_git_path_submodule(&objects_directory, path, "objects/");
 	if (!is_directory(objects_directory.buf)) {
 		ret = -1;
 		goto done;
 	}
 	/* avoid adding it twice */
+	prepare_alt_odb();
 	for (alt_odb = alt_odb_list; alt_odb; alt_odb = alt_odb->next)
 		if (alt_odb->name - alt_odb->base == objects_directory.len &&
 				!strncmp(alt_odb->base, objects_directory.buf,
@@ -153,7 +147,6 @@ static int add_submodule_odb(const char *path)
 
 	/* add possible alternates from the submodule */
 	read_info_alternates(objects_directory.buf, 0);
-	prepare_alt_odb();
 done:
 	strbuf_release(&objects_directory);
 	return ret;
