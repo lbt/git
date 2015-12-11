@@ -1,3 +1,76 @@
+Version v2.6.4; changes since v2.6.3:
+-------------------------------------
+
+Atousa Pahlevan Duprat (2):
+      sha1: provide another level of indirection for the SHA-1 functions
+      sha1: allow limiting the size of the data passed to SHA1_Update()
+
+Charles Bailey (1):
+      http: treat config options sslCAPath and sslCAInfo as paths
+
+Christian Couder (1):
+      Documentation/git-update-index: add missing opts to synopsys
+
+Clemens Buchacher (1):
+      allow hooks to ignore their standard input stream
+
+Daniel Knittl-Frank (1):
+      Escape Git's exec path in contrib/rerere-train.sh script
+
+David Aguilar (1):
+      difftool: ignore symbolic links in use_wt_file
+
+Dennis Kaarsemaker (2):
+      t5813: avoid creating urls that break on cygwin
+      check-ignore: correct documentation about output
+
+Doug Kelly (2):
+      t5304: test cleaning pack garbage
+      gc: remove garbage .idx files from pack dir
+
+Fredrik Medley (1):
+      rebase-i-exec: Allow space in SHELL_PATH
+
+GIRARD Etienne (1):
+      git-p4: clean up after p4 submit failure
+
+John Keeping (3):
+      interpret-trailers: allow running outside a repository
+      rebase: support --no-autostash
+      Documentation/git-rebase: fix --no-autostash formatting
+
+Junio C Hamano (3):
+      prepare_packed_git(): refactor garbage reporting in pack directory
+      Prepare for 2.6.4
+      Git 2.6.4
+
+Luke Diamand (3):
+      git-p4: add failing test for submit from detached head
+      git-p4: add option to system() to return subshell status
+      git-p4: work with a detached head
+
+Michael J Gruber (1):
+      Documentation/diff: give --word-diff-regex=. example
+
+Pat Thoyts (1):
+      remote-http(s): support SOCKS proxies
+
+Rainer M. Canavan (1):
+      configure.ac: use $LIBS not $CFLAGS when testing -lpthread
+
+René Scharfe (1):
+      wt-status: correct and simplify check for detached HEAD
+
+SZEDER Gábor (4):
+      bash prompt: test dirty index and worktree while on an orphan branch
+      bash prompt: remove a redundant 'git diff' option
+      bash prompt: indicate dirty index even on orphan branches
+      filter-branch: deal with object name vs. pathname ambiguity in tree-filter
+
+Андрей Рыбак (1):
+      Documentation: make environment variable formatting more consistent
+
+
 Version v2.6.3; changes since v2.6.2:
 -------------------------------------
 
