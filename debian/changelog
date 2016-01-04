@@ -1,8 +1,10 @@
-git (1:2.7.0~rc3-0.1) unstable; urgency=low
+git (1:2.7.0~rc3-1) unstable; urgency=low
 
   * new upstream release candidate (see RelNotes/2.7.0.txt).
+  * debian/control: Standards-Version: 3.9.6.0.
+  * debian/control: use HTTPS for Homepage URL.
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Mon, 04 Jan 2016 12:21:53 -0800
+ -- Jonathan Nieder <jrnieder@gmail.com>  Mon, 04 Jan 2016 12:25:50 -0800
 
 git (1:2.6.4-1) unstable; urgency=medium
 
