@@ -1,4 +1,4 @@
-From e3a987b087ab9bb0d1ffc167e051fd10a8e22df2 Mon Sep 17 00:00:00 2001
+From abb6ee956bd3d9c5fedbe425909583c36d35ff92 Mon Sep 17 00:00:00 2001
 From: Jonathan Nieder <jrnieder@gmail.com>
 Date: Mon, 6 Jun 2011 04:46:20 -0500
 Subject: transport: optionally honor DNS SRV records
@@ -61,10 +61,10 @@ Signed-off-by: Jonathan Nieder <jrnieder@gmail.com>
  create mode 100644 srv.h
 
 diff --git a/Makefile b/Makefile
-index 7ba7378..fbb7da6 100644
+index a60888e..2ebb6e6 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -171,6 +171,10 @@ all::
+@@ -169,6 +169,10 @@ all::
  # Notably on Solaris hstrerror resides in libresolv and on Solaris 7
  # inet_ntop and inet_pton additionally reside there.
  #
@@ -75,7 +75,7 @@ index 7ba7378..fbb7da6 100644
  # Define NO_MMAP if you want to avoid mmap.
  #
  # Define NO_SYS_POLL_H if you don't have sys/poll.h.
-@@ -1167,6 +1171,11 @@ endif
+@@ -1169,6 +1173,11 @@ endif
  ifdef NEEDS_NSL
  	EXTLIBS += -lnsl
  endif

@@ -1,4 +1,4 @@
-From 4fed58d5a419e2b893fc1b04782b568ff097de2d Mon Sep 17 00:00:00 2001
+From 9f3f33ef724cc2ac5d522f109fe63360ae13289a Mon Sep 17 00:00:00 2001
 From: Jonathan Nieder <jrnieder@gmail.com>
 Date: Mon, 6 Jun 2011 04:37:14 -0500
 Subject: transport: expose git_tcp_connect() and friends in new tcp.h
@@ -14,15 +14,15 @@ Signed-off-by: Jonathan Nieder <jrnieder@gmail.com>
 ---
  Makefile  |   1 +
  connect.c | 270 +------------------------------------------------------------
- connect.h |   2 +
+ connect.h |   1 +
  tcp.c     | 271 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  tcp.h     |   9 +++
- 5 files changed, 285 insertions(+), 268 deletions(-)
+ 5 files changed, 284 insertions(+), 268 deletions(-)
  create mode 100644 tcp.c
  create mode 100644 tcp.h
 
 diff --git a/Makefile b/Makefile
-index 37e2d9e..bb1cf90 100644
+index fd19b54..43aa8c7 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -799,6 +799,7 @@ LIB_OBJS += submodule.o
@@ -34,7 +34,7 @@ index 37e2d9e..bb1cf90 100644
  LIB_OBJS += trace.o
  LIB_OBJS += trailer.o
 diff --git a/connect.c b/connect.c
-index d3283b8..16d76f1 100644
+index fd7ffe1..9fbe198 100644
 --- a/connect.c
 +++ b/connect.c
 @@ -6,6 +6,7 @@
@@ -45,7 +45,7 @@ index d3283b8..16d76f1 100644
  #include "url.h"
  #include "string-list.h"
  #include "sha1-array.h"
-@@ -274,7 +275,7 @@ static enum protocol get_protocol(const char *name)
+@@ -276,7 +277,7 @@ static enum protocol get_protocol(const char *name)
  	die("I don't handle protocol '%s'", name);
  }
  
@@ -54,7 +54,7 @@ index d3283b8..16d76f1 100644
  {
  	char *host = *hoststart;
  	char *end;
-@@ -298,273 +299,6 @@ static char *host_end(char **hoststart, int removebrackets)
+@@ -300,273 +301,6 @@ static char *host_end(char **hoststart, int removebrackets)
  	return end;
  }
  
@@ -93,7 +93,7 @@ index d3283b8..16d76f1 100644
 -	static char addr[NI_MAXHOST];
 -	if (getnameinfo(ai->ai_addr, ai->ai_addrlen, addr, sizeof(addr), NULL, 0,
 -			NI_NUMERICHOST) != 0)
--		strcpy(addr, "(unknown)");
+-		xsnprintf(addr, sizeof(addr), "(unknown)");
 -
 -	return addr;
 -}
@@ -329,19 +329,19 @@ index d3283b8..16d76f1 100644
  {
  	char *end;
 diff --git a/connect.h b/connect.h
-index c41a685..e97a835 100644
+index c41a685..45763a8 100644
 --- a/connect.h
 +++ b/connect.h
-@@ -11,4 +11,6 @@ extern int parse_feature_request(const char *features, const char *feature);
+@@ -10,5 +10,6 @@ extern int server_supports(const char *feature);
+ extern int parse_feature_request(const char *features, const char *feature);
  extern const char *server_feature_value(const char *feature, int *len_ret);
  extern int url_is_local_not_ssh(const char *url);
- 
 +extern char *host_end(char **hoststart, int removebrackets);
-+
+ 
  #endif
 diff --git a/tcp.c b/tcp.c
 new file mode 100644
-index 0000000..a4ece54
+index 0000000..c8e3a9d
 --- /dev/null
 +++ b/tcp.c
 @@ -0,0 +1,271 @@
@@ -385,7 +385,7 @@ index 0000000..a4ece54
 +	static char addr[NI_MAXHOST];
 +	if (getnameinfo(ai->ai_addr, ai->ai_addrlen, addr, sizeof(addr), NULL, 0,
 +			NI_NUMERICHOST) != 0)
-+		strcpy(addr, "(unknown)");
++		xsnprintf(addr, sizeof(addr), "(unknown)");
 +
 +	return addr;
 +}
